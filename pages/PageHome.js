@@ -1,6 +1,7 @@
 // import hero_doc from '../public/hero-Doc.png';
 let hero_doc = '/hero-Doc.png'
 import Navbar from '../Components/HomePage/HomeNavbar';
+import Link from 'next/link'
 
 
 function Hero() {

@@ -1,4 +1,5 @@
 let logo = '/MainLogo.png';
+import Link from 'next/link'
 
 function Navbar() {
     return (
@@ -8,13 +9,19 @@ function Navbar() {
         </div>
         <ul className="navbar-menu">
           <li className="navbar-item">
-            <a href="#">Home</a>
+            <Link href="/">
+              Home
+            </Link>
           </li>
           <li className="navbar-item">
-            <a href="#">About Us</a>
+            <Link href="/About">
+              About Us
+            </Link>
           </li>
           <li className="navbar-item">
-            <a href="#">Contact Us</a>
+            <Link href="/Contact">
+              Contact Us
+            </Link>
           </li>
           <li className="navbar-item">
             <button className="log-but">Login</button>
