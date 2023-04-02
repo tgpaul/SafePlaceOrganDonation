@@ -14,8 +14,12 @@ function Hero() {
           Join the future of giving today and become the hero in someone’s story. 
           Blockchain-powered organ donation makes giving the ultimate gift easy and secure.        </p>
           <div className="hero-buttons">
-            <button className="login-button">Login</button>
-            <button className="how-it-works-button">How It Works</button>
+            <Link href="/LoginPage">
+              <button className="login-button">Login</button>
+            </Link>
+            <Link href="/HowItWorks">
+              <button className="how-it-works-button">How It Works</button>
+            </Link>
           </div>
         </div>
         <div className="hero-image">

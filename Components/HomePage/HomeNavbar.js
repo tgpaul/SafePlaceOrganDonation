@@ -24,7 +24,9 @@ function Navbar() {
             </Link>
           </li>
           <li className="navbar-item">
-            <button className="log-but">Login</button>
+            <Link href="/LoginPage">
+              <button className="log-but">Login</button>
+            </Link>
           </li>
         </ul>
       </nav>
