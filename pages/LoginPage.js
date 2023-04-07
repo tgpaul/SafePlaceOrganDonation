@@ -1,7 +1,7 @@
-import logo from '../public/logowhite.png';
+let logo = '/logowhite.png';
 import metamask_logo from '../public/metamask-icon.svg'
 import DonorSignup from '../Components/LoginPage/DonorSignUp.js'
-import MiniNav from '../Components/LoginPage/MiniNavbar.js'
+// import MiniNav from '../Components/LoginPage/MiniNavbar.js'
 import Carousel from '../Components/LoginPage/Carousal';
 
 
@@ -21,8 +21,7 @@ function LoginPage() {
         </div>
         <div className="Login-Right">
           {/* <div><MiniNav /></div> */}
-          <div className='loginComponetSapce' ><Carousel/></div>
-          
+          <Carousel/>
         </div>
       </section>
     );

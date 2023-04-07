@@ -2,7 +2,7 @@
 .Login{
     display: flex;
     justify-content: space-between;
-    height: 100%;
+    height: 98.5vh;
   }
   
   .Login-Left{
@@ -12,9 +12,10 @@
   
   .Login-Right{
     width: 50vw;
+    height: 98.5vh;
+
+    
   }
-  
-  
   
   .login-logo{
     padding-top: 5rem;
@@ -42,32 +43,13 @@
     color: #FFFFFF;
   }
   
-  .mini-navbar {
+
+  .Carousal-NavBar{
     display: flex;
-    flex-direction: column;
-    padding: .9em;
-    padding-right: 2rem;
-    z-index: 1;
-  }
-  
-  .mini-navbar-menu {
-    display: flex;
-    list-style: none;
-    margin-right: 1rem;
-    justify-content: flex-end;
-  }
-  
-  .mini-navbar-item {
-    margin-left: 2rem;
-    margin-right: 1rem;
-    text-decoration: none;
-    color: #808080;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-  .mini-navbar-item a:visited {
-    color: #808080;
+    flex-direction: row;
+    position: absolute;
+    right: 0;
+    padding: 2rem;
   }
   
   .LogDonorFields{
@@ -101,7 +83,8 @@
     padding-left: 2rem;
   }
   
-  #Metamask-Button{
+  .metamask-button{
+    display: flex;
     align-items: center;
     justify-content: center;
     outline: none;
@@ -111,12 +94,47 @@
     transition-duration: .3s;
     border: 1px solid transparent;
     letter-spacing: 2px;
-    width: 100%;
+    width: 40%;
     white-space: normal;
     text-align: center;
     color: black;
     box-shadow: inset 0 0 0 2px #616467;
     background-color: transparent;
+    height: 3rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+  
+  }
+
+
+  .metamask-button span{
+    /* background-color: #616467; */
+    font-weight: 500;
+    margin-left: 0.3rem;
+  }
+
+  .metamasklogo{
+    padding-right: 0.5rem;
+  
+  }
+
+
+  .Sign-Up-button{
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 500px;
+    border: none;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    background-color: #247DFF;
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    cursor: pointer;
+    letter-spacing: 2px;
+    width: 40%;
+    white-space: normal;
+    text-align: center;
     height: 3rem;
     margin-top: 1rem;
   
@@ -141,9 +159,9 @@
   /* login page css donor sign css*/
   
   .DonorSignUpBox{
-    background-color: #6693e0;
+    /* background-color: #6693e0; */
     margin: 5rem;
-    margin-top: 0;
+    margin-top: 23vh;
     
   }
   
@@ -157,27 +175,27 @@
     grid-template-columns: 40% 40%;
     grid-gap: 2rem;
   }
-  
+  .residential-address-input {
+    width: max-content;
+    height: 5rem;
+  }
   
   .SignUpGrid label input {
     align-content: center;
     justify-content: center;
     background: #E2E2E2;
     border-radius: 10px;
-    border-style: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cacaca;
     height: 2rem;
-    margin-top: 0rem;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-    width: 80%;
+    padding: 0.5rem;
+    width: 100%;
   }
   
   .residential-address {
-    background-color: #000000;
+    /* background-color: #414141; */
     grid-column-start: 1;
     grid-column-end: 3;
   }
   
-  .residential-address input {
-    width: max-content;
-  }

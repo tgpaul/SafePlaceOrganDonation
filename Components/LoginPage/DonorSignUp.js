@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+let metamask_logo = '/metamask-icon.svg'
 
 function DonorSignup() {
   const [firstName, setFirstName] = useState('');
@@ -57,11 +58,12 @@ function DonorSignup() {
         </label>
         <label className='residential-address'>
           Residential Address:
-          <p><input  type="text" value={residentialAddress} onChange={handleResidentialAddressChange} /></p>
+          <p><input className='residential-address-input' type="text" value={residentialAddress} onChange={handleResidentialAddressChange} /></p>
         </label>
       </form>
-      <button className='metamask-button' onClick={handleConnectWallet}>Connect to Metamask Wallet</button>
-      <button className='Sing Up' onClick={handleSignup}>Sign Up</button>
+      <button className='metamask-button' onClick={handleConnectWallet}><img src = {metamask_logo} width = "30" height = "30" className="metamasklogo" alt="" />  Connect <span>Metamask</span> </button>
+      <br></br>
+      <button className='Sign-Up-button' onClick={handleSignup}>Sign Up</button>
     </div>
   );
 }

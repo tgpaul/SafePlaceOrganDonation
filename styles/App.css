@@ -2,7 +2,8 @@
 
 .App {
   text-justify: auto;
-  height: 100vh;
+  height: 98.5vh;
+  margin: 0%;
 }
 div{
   font-family: Inter;
