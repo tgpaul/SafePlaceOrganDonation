@@ -1,0 +1,197 @@
+.main-flex-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.sidenav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15rem;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 30px rgb(199, 199, 199);
+}
+
+.sidenav-logo{
+    padding-top: 4rem;
+}
+
+.profile{
+    padding-top: 4rem;
+    border-radius: 50%;
+}
+
+.profile h3{
+	text-align: center;
+	color: #000000;
+	padding-top: 1rem;
+	margin: 0;
+}
+
+.nav-links{
+	list-style-type: none;
+	margin: 0;
+    margin-top: 4rem;
+    margin-right: 3rem;
+    display: inline-block;
+}
+
+
+.nav-links li a {
+	color: #000000;
+	margin-bottom: 1rem;
+	text-decoration: none;
+    
+}
+
+.logout
+{
+    position: fixed;
+    bottom: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto 1rem;
+    width:8rem;
+    height: 3rem;
+    background: rgba(255, 255,255,0.54); 
+    border: 2px solid #247DFF;
+    border-radius: 50px;
+
+}
+
+.logout:hover
+{
+    background: rgba(112, 169, 235, 0.54); 
+    border: 2px solid #1152c2;
+    transition: 0.4s;
+}
+
+.dash{
+    border-radius: 15px;
+    background-color: rgba(215, 234, 255, 0.49);
+    padding: 1rem;
+    width: 8rem;
+    display: inline-block;
+
+}
+
+.settings{
+    border-radius: 15px;
+    /* background-color: rgba(215, 234, 255, 0.49); */
+    padding: 1rem;
+    width: 8rem;
+    display: inline-block;
+
+}
+
+.dash:hover,
+.settings:hover{
+    background-color: rgba(215, 234, 255, 0.9);
+    transition: 0.4s;
+}
+
+.flex-child{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#form1{
+    background-color: rgba(72, 63, 67, 1);
+    color: white;
+    width: 90%;
+    margin: 4rem;
+    padding: 3rem;
+    border-radius: 20px;
+}
+
+#form1 h1{
+    width: 13.5rem;
+    padding-bottom: 1rem;
+    box-shadow: 0px 5px white;
+}
+
+.save-button{
+ background-color: #247DFF;
+  border:#247DFF;
+  color: white;
+  padding: 8px 145px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* Styling form-control Class */
+.form-control {
+    text-align: left;
+    margin-bottom: 25px;  
+}
+
+/* Styling form-control Label */
+.form-control label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Styling form-control input */
+.form-control input, .form-control select, .form-control textarea {
+    border: 1px solid #777;
+    border-radius: 10px;
+    font-family: inherit;
+    padding: 10px;
+    display: block;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+/* Styling form-control Radio
+        button and Checkbox */
+        .form-control input[type="radio"],
+        .form-control input[type="checkbox"] {
+            display: inline-block;
+            width: auto;
+        }
+
+#donor-details-form h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: SF UI Text;
+    text-decoration: underline;
+}
+
+#donor-details-form h2 {
+    font-size: 18px;
+    font-style:oblique;
+}
+
+
+#form2{
+    background: rgba(47, 151, 193, 1);
+    color: white;
+    width: 90%;
+    margin: 4rem;
+    padding: 3rem;
+    border-radius: 20px;
+
+}
+
+#form2 h1{
+    width: 16.6rem;
+    padding-bottom: 1rem;
+    box-shadow: 0px 5px white;
+}
+
+.image-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:15rem ;
+}
