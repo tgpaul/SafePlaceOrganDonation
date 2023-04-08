@@ -23,7 +23,7 @@ function Navbar() {
               Contact Us
             </Link>
           </li>
-          <li className="navbar-item">
+          <li className="NavbarLoginButton" id = "NavbarLoginButton">
             <Link href="/LoginPage">
               <button className="log-but">Login</button>
             </Link>
