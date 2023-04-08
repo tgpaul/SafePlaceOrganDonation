@@ -1,6 +1,6 @@
 import DonorSignup from './DonorSignUp.js'
 import DonorLogin from './DonorLogin.js'
-import HostpitalLogin from './HospitalLogin.js';
+import HospitalLogin from './HospitalLogin.js';
 import Link from 'next/link'
 
 import React, { useState, useEffect  } from 'react';
@@ -19,7 +19,7 @@ const Carousel = () => {
         setComponent(<DonorSignup/>);
         break;
       case "HospitalLogin":
-        setComponent(<HostpitalLogin/>);
+        setComponent(<HospitalLogin/>);
         break;
       default:
         setComponent(<div>DonorLogin</div>);

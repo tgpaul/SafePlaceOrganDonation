@@ -82,12 +82,12 @@
   .Corusal_buttons:hover,
   #Corusal_Home_button:hover{
     cursor: pointer;
-    color: #303233;
+    color: #247DFF;
   }
   .active {
-    color: #303233;
+    color: #247DFF;
     padding-bottom: 5px;
-    box-shadow: 0px 2px 0px #303233;
+    box-shadow: 0px 2px 0px #247DFF;
   }
   
   .LogDonorFields{
