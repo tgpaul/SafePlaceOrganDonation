@@ -2,17 +2,20 @@
 .Login{
     display: flex;
     justify-content: space-between;
-    height: 98.5vh;
+    height: 100%;
   }
   
   .Login-Left{
     width: 50vw;
     background-color: #247DFF;
+    min-height: 100vh;
+    margin-bottom: 0;
   }
   
   .Login-Right{
     width: 50vw;
-    height: 98.5vh;
+    min-height: 100%;
+    min-height: 100vh;
 
     
   }
@@ -31,6 +34,7 @@
     font-size: 4rem;
     font-weight: 900;
     margin: 0;
+    padding-top: 0;
     color: #FFFFFF;
     font-weight: 900;
   }
@@ -42,7 +46,13 @@
     margin-right: 15rem;
     color: #FFFFFF;
   }
-  
+
+  .smily{
+    padding-top: 0rem;
+    padding-left: 1rem;
+    }
+
+
 
   .Carousal-NavBar{
     display: flex;
@@ -50,6 +60,34 @@
     position: absolute;
     right: 0;
     padding: 2rem;
+  }
+
+  .Corusal_buttons{
+    text-decoration: none;
+    color: #494d51;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding-inline: 0%;
+    margin-inline: 1rem;
+  }
+  #Corusal_Home_button{
+    text-decoration: none;
+    color: #494d51;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding-inline: 0%;
+    margin-inline-end: 26vh;
+  }
+
+  .Corusal_buttons:hover,
+  #Corusal_Home_button:hover{
+    cursor: pointer;
+    color: #303233;
+  }
+  .active {
+    color: #303233;
+    padding-bottom: 5px;
+    box-shadow: 0px 2px 0px #303233;
   }
   
   .LogDonorFields{
@@ -66,7 +104,7 @@
   }
   
   .LogDonor h1{
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bolder;
   }
   
@@ -74,13 +112,16 @@
     align-content: center;
     justify-content: center;
     background: #E2E2E2;
-    border-radius: 59px;
-    border-style: none;
-    width: 94%;
-    height: 0.5rem;
+    border-radius: 100px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cacaca;
+    height: 2rem;
+    padding: 0.5rem;
+    width: 95%;
     margin-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
   }
   
   .metamask-button{
@@ -139,8 +180,38 @@
     margin-top: 1rem;
   
   }
+
+
+  #metamask-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    border-radius: 500px;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    color: black;
+    box-shadow: inset 0 0 0 2px #616467;
+    background-color: transparent;
+    height: 3.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding-top: 0;
+  }
+
+  #metamask-button:hover{
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    box-shadow: inset 0 0 0 2px #000000;
+  }
   
-  .LogDonor button {
+  #log-but {
     border: none;
     padding: 0.6rem 2.8rem;
     border-radius: 2rem;
@@ -148,13 +219,17 @@
     color: #FFFFFF;
     font-size: 1.2rem;
     cursor: pointer;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
   
-  .LogDonor button:hover {
+  #log-but:hover {
     background-color: #1152c2;
+    transition-property: background-color;
+    transition-duration: .3s;
     
   }
+
+
   
   /* login page css donor sign css*/
   
@@ -197,5 +272,23 @@
     /* background-color: #414141; */
     grid-column-start: 1;
     grid-column-end: 3;
+  }
+
+  .LogHospitalFields{
+    display: flex;
+    flex-direction: row;
+    padding-top: 2em;
+  }
+  
+  .LogHospital{
+    position: relative;
+    margin-left: 4rem;
+    margin-top: 25vh;
+    width: 50%;
+  }
+  
+  .LogHospital h1{
+    font-size: 3rem;
+    font-weight: bolder;
   }
   

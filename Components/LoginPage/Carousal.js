@@ -1,35 +1,63 @@
 import DonorSignup from './DonorSignUp.js'
+import DonorLogin from './DonorLogin.js'
+import HostpitalLogin from './HospitalLogin.js';
 import Link from 'next/link'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 
 const Carousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [page, setPage] = useState("DonorLogin");
 
-  const pages = [
-    <div>Page 1 content</div>,
-    <div><DonorSignup /></div>,
-    <div>Page 3 content</div>
-  ];
+  useEffect(() => {
+    // This function is called when the component mounts
+    // and when the 'page' state changes.
+    switch (page) {
+      case "DonorLogin":
+        setComponent(<DonorLogin/>);
+        break;
+      case "DonorSignup":
+        setComponent(<DonorSignup/>);
+        break;
+      case "HospitalLogin":
+        setComponent(<HostpitalLogin/>);
+        break;
+      default:
+        setComponent(<div>DonorLogin</div>);
+        break;
+    }
+  }, [page]);
 
-  const handlePageChange = (newIndex) => {
-    setActiveIndex(newIndex);
-  }
+  const [component, setComponent] = useState(<DonorSignup/>);
 
   return (
     <>
       {/* This is a mini navbar used for the carousal, this replaced the previous MiniNavbar */}
       <nav className='Carousal-NavBar'>
-        <Link href="/PageHome">
-            <button className="Corusal_buttons">Home</button>
-        </Link>
-        {pages.map((page, index) => (
-            <button className='Corusal_buttons' key={index} onClick={() => handlePageChange(index)}>
-              {index === 0 ? 'Donor Login' : index === 1 ? 'Donor Signup' : 'Hospital Login'}
-            </button>
-        ))}
+        <ul>
+          <Link className="Corusal_buttons " id = "Corusal_Home_button" href="/PageHome">
+              Home
+          </Link>
+          <a
+            className={`Corusal_buttons ${page === 'DonorLogin' ? 'active' : ''}`}
+            onClick={() => setPage('DonorLogin')}
+          >
+            Donor Login
+          </a>
+          <a
+            className={`Corusal_buttons ${page === 'DonorSignup' ? 'active' : ''}`}
+            onClick={() => setPage('DonorSignup')}
+          >
+            Donor Signup
+          </a>
+          <a
+            className={`Corusal_buttons ${page === 'HospitalLogin' ? 'active' : ''}`}
+            onClick={() => setPage('HospitalLogin')}
+          >
+            Hospital Login
+          </a>
+        </ul>
       </nav>
-      {pages[activeIndex]}
+      {component}
     </>
   );
 }
