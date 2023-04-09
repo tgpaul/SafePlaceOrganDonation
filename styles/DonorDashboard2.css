@@ -182,7 +182,7 @@
 
 }
 
-#form2 h1{
+.card-heading{
     width: 16.6rem;
     padding-bottom: 1rem;
     box-shadow: 0px 5px white;
@@ -194,4 +194,68 @@
     justify-content: center;
     align-items: center;
     margin-top:15rem ;
+}
+
+.card-control{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipientCard{
+    flex: 1;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+
+.recipientCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000000;
+}
+.recipientCard h1{
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: inherit;
+}
+
+.detail_slots{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+    width: 90%;
+    margin-top: 3rem;
+}
+
+.slot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #e0e0e0;
+    height: 4rem;
+    margin-top: 0;
+    border-radius: 10px;
+}
+
+.slot div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(72, 63, 67, 1);
+    height: 4rem;
+    width: 5rem;
+    border-radius: 10px;
+}
+
+.slot p {
+    margin-left: 1rem;
 }
