@@ -20,6 +20,7 @@ function DonorLogin() {
 
   const handleLogin = () => {
     // Add logic to handle signup
+    window.location.href = '/DonorDashboard2'
   };
 
     return (
