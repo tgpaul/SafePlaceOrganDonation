@@ -5,6 +5,7 @@ import '../styles/LoginPage.css';
 import '../styles/About.css';
 // import '../styles/DonorDashboard.css';
 import '../styles/DonorDashboard2.css'
+import '../styles/HospitalDashboard.css'
 
 export default function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
