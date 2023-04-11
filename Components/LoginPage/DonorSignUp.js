@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 let metamask_logo = '/metamask-icon.svg'
 import connectMetamask from './metamask-connection';
 
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { signIn } from "next-auth/react";
+import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+import { useRouter } from "next/router";
+import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
+
 import Web3 from 'web3';
 
 
@@ -25,6 +31,53 @@ import Web3 from 'web3';
 // }
 
 function DonorSignup() {
+
+  const { connectAsync } = useConnect();
+  const { disconnectAsync } = useDisconnect();
+  const { isConnected } = useAccount();
+  const { signMessageAsync } = useSignMessage();
+  const { requestChallengeAsync } = useAuthRequestChallengeEvm();
+  const { push } = useRouter();
+
+  const handleAuth = async () => {
+    try {
+      
+    if (isConnected) {
+      await disconnectAsync();
+    }
+
+    const { account, chain } = await connectAsync({
+      connector: new MetaMaskConnector(),
+    });
+
+    const { message } = await requestChallengeAsync({
+      address: account,
+      chainId: chain.id,
+    });
+
+    const signature = await signMessageAsync({ message });
+
+    // redirect user after success authentication to '/user' page
+    const { url } = await signIn("moralis-auth", {
+      message,
+      signature,
+      redirect: false,
+      callbackUrl: "/user",
+    });
+
+  }
+ catch (error) {
+      console.log("Eroor")
+  }
+    /**
+     * instead of using signIn(..., redirect: "/user")
+     * we get the url from callback and push it to the router to avoid page refreshing
+     */
+    // push(url);
+  };
+
+// aaaa
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -85,7 +138,7 @@ function DonorSignup() {
           <p><input className='residential-address-input' type="text" value={residentialAddress} onChange={handleResidentialAddressChange} /></p>
         </label>
       </form>
-      <button className='metamask-button' onClick={handleConnectWallet}><img src = {metamask_logo} width = "30" height = "30" className="metamasklogo" alt="" />  Connect <span>Metamask</span> </button>
+      <button className='metamask-button' onClick={handleAuth}><img src = {metamask_logo} width = "30" height = "30" className="metamasklogo" alt="" />  Connect <span>Metamask</span> </button>
       <br></br>
       <button className='Sign-Up-button' onClick={handleSignup}>Sign Up</button>
     </div>
