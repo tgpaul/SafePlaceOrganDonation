@@ -344,6 +344,35 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_hospitalID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_recipientID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_donorID",
+				"type": "uint256"
+			}
+		],
+		"name": "RecipientSplitMatch",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
