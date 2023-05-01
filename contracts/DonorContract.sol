@@ -189,4 +189,22 @@ contract DonorContract{
             donors[donorAddressList[msg.sender]].recipientID 
         );
     }
+
+
+
+
+    //The split-up function to do the matching
+    function DonorSplitMatch ( uint _hospitalID, uint _recipientID, uint _donorID ) public returns ( uint )
+    {
+        //Check whether the given donor exists
+        require( donors[_donorID].donorID != 0, "Match Error : Cannot find this donor!" );
+
+        //Update the object and then emit for validation
+        donors[_donorID].hospitalID = _hospitalID;
+        donors[_donorID].recipientID = _recipientID;
+
+        emit TaskCompletedEvent( donors[_donorID].donorID );
+
+        return ( donors[_donorID].donorID );
+    }
 }

@@ -201,4 +201,19 @@ contract HospitalRecipient {
             rec.hospitalID
          );
     }
+
+    //The split-up function to do the matching
+    function RecipientSplitMatch ( uint _hospitalID, uint _recipientID, uint _donorID ) public returns ( uint )
+    {
+        //Check whether the given recipient and hospital exists
+        require( recipients[_recipientID].recipientID != 0, "Match Error : Cannot find this recipient!" );
+        require( hospitals[_hospitalID].hospitalID != 0, "Match Error : Cannot find this hospital!" );
+
+        //Update the object and then emit for validation
+        recipients[_recipientID].donorID = _donorID;
+
+        emit TaskCompletedEvent( recipients[_recipientID].recipientID );
+
+        return ( recipients[_recipientID].recipientID );
+    }
 }
