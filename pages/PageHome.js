@@ -32,7 +32,6 @@ function Hero() {
 
 
 function HomePage() {
-    //console.log("paul here");
     return (
       <div className='App'>
         <Navbar />
