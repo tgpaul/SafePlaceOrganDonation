@@ -1,0 +1,19 @@
+{
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getValue",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ],
+    "address": "0x123456789abcdef"
+  }
