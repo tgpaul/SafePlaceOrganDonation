@@ -4,6 +4,7 @@ import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
 import { useRouter } from "next/router";
 import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import SignUpFunction from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg';
 
@@ -32,7 +33,7 @@ function DonorSignup() {
       
 
       const signature = await signMessageAsync({ message });
-      console.log(account)
+      console.log(account);
 
       const { url } = await signIn("moralis-auth", {
         message,
@@ -74,8 +75,8 @@ function DonorSignup() {
     event.preventDefault();
     const { firstname, lastname, phoneNumber, email, address } = state;
 
-  // Call signFunction with form values as parameters
-    signFunction(firstname, lastname, phoneNumber, email, address);
+    // Call signFunction with form values as parameters
+    //SignUpFunction(account, firstname, lastname, phoneNumber, email, address);
     console.log(state);
   };
 
