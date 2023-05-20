@@ -77,41 +77,58 @@ function DonorSignup() {
   };
 
 // aaaa
+  class DonorSignupData{
+    constructor() {
+      this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNo: '',
+      residentialAddress: ''
+      };
+    }
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [residentialAddress, setResidentialAddress] = useState('');
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
+    handleInputChange = (event) => {
+      const { name, value } = event.target;
+      this.setState({ [name]: value });
+    };
 
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
+    handleSignup = () => {
+      const {
+      firstName,
+      lastName,
+      email,
+      phoneNo,
+      residentialAddress
+      } = this.state;
 
-  const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
-  };
+  // Create a data structure with form data
+      const donorSignupData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNo: phoneNo,
+      residentialAddress: residentialAddress
+      };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  // Use the donorSignupData variable as needed
+      console.log(donorSignupData);
+      };
 
-  const handleResidentialAddressChange = (event) => {
-    setResidentialAddress(event.target.value);
-  };
+  render() {
+    const {
+      firstName,
+      lastName,
+      email,
+      phoneNo,
+      residentialAddress
+    } = this.state;
 
-  const handleConnectWallet = () => {
-    // Add logic to connect to Metamask wallet
-    connectMetamask();
-  };
+    }
+  }
 
-  const handleSignup = () => {
-    // Add logic to handle signup
-  };
+  const DonorForm = new DonorSignupData();
 
   return (
     <div className='DonorSignUpBox'>
@@ -119,28 +136,28 @@ function DonorSignup() {
       <form className='SignUpGrid'>
         <label>
           First Name:
-          <p><input type="text" value={firstName} onChange={handleFirstNameChange} /></p>
+          <p><input type="text" value={firstName} onChange={DonorForm.handleInputChange} /></p>
         </label>
         <label>
           Last Name:
-          <p><input type="text" value={lastName} onChange={handleLastNameChange} /></p>
+          <p><input type="text" value={lastName} onChange={DonorForm.handleInputChange} /></p>
         </label>
         <label>
           Phone Number:
-          <p><input type="tel" value={phoneNumber} onChange={handlePhoneNumberChange} /></p>
+          <p><input type="tel" value={phoneNo} onChange={DonorForm.handleInputChange} /></p>
         </label>
         <label>
           Email:
-          <p><input type="email" value={email} onChange={handleEmailChange} /></p>
+          <p><input type="email" value={email} onChange={DonorForm.handleInputChange} /></p>
         </label>
         <label className='residential-address'>
           Residential Address:
-          <p><input className='residential-address-input' type="text" value={residentialAddress} onChange={handleResidentialAddressChange} /></p>
+          <p><input className='residential-address-input' type="text" value={residentialAddress} onChange={DonorForm.handleInputChange} /></p>
         </label>
       </form>
       <button className='metamask-button' onClick={handleAuth}><img src = {metamask_logo} width = "30" height = "30" className="metamasklogo" alt="" />  Connect <span>Metamask</span> </button>
       <br></br>
-      <button className='Sign-Up-button' onClick={handleSignup}>Sign Up</button>
+      <button className='Sign-Up-button' onClick={DonorForm.handleSignup}>Sign Up</button>
     </div>
   );
 }
