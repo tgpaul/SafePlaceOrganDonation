@@ -7,9 +7,10 @@ import React from 'react';
 let MatchFound = 1;
 
 function DonorDashboardBody() {
-  return (
+  return (<>
+    <SideNavbar name = {'Alby'}/>
     <div className="main-flex-container">
-      <SideNavbar/>
+      
       <div className="flex-child">
         <DonorInfoForm/> 
       </div>
@@ -21,6 +22,7 @@ function DonorDashboardBody() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

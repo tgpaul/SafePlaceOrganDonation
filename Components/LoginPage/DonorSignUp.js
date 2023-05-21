@@ -101,7 +101,7 @@ function DonorSignup() {
         </label>
       </form>
       <button id="authButton" className='metamask-button' onClick={connectWallet}>
-        <img src={metamask_logo} width="30" height="30" className="metamasklogo" alt="" /> Connect <span>Metamask</span>
+        <img src={metamask_logo} width="30" height="30" className="metamasklogo" alt="" /><span>Metamask</span>
       </button>
       <br></br>
       <button className='Sign-Up-button' onClick={handleSubmit}>Sign Up</button>
