@@ -3,7 +3,13 @@ const DonorContract = require('../../blockchain/build-info/DonorContract.json');
 
 let accounts, web3, donorContract;
 
-async function SignUpFunction( firstname, lastname, contact, email, resAddress ){
+/**
+ * Functions:-
+ * 1. DonorSignUpFunction - Function to call DonorSignUp
+ * 2. DonorLoginFunction - Function to call DonorLogin 
+ **/
+
+export async function DonorSignUpFunction( firstname, lastname, contact, email, resAddress ){
 try{
     // popup - get the user's address
     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -23,7 +29,7 @@ try{
             email,
             resAddress
         ).encodeABI(),
-        gasPrice: '0x09184e72a000', // custom gas price
+        gasPrice: '3000000000', // custom gas price
     };
 
      // popup - request the user to sign and broadcast the transaction
@@ -39,4 +45,19 @@ try{
     
 }
 
-export default SignUpFunction;
+export async function DonorLoginFunction( email ){
+    const transactionParameters = {
+        from: accounts[0],
+        to: DonorContract.address,
+        data: donorContract.methods.DonorSignUp(
+            email
+        ).encodeABI(),
+        gasPrice: '3000000000', // custom gas price
+    }; 
+
+    console.log("Transaction Complete");
+    await ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [transactionParameters],
+    });
+}
