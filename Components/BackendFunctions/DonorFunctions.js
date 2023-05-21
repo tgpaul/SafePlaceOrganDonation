@@ -16,7 +16,7 @@ try{
 
     // using web3 just as a helper to generate the transaction
     // (see the `data` field and `encodeABI`) - not to sign it
-    web3 = new Web3();
+    web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
     donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
 
     const transactionParameters = {
@@ -33,12 +33,21 @@ try{
     };
 
      // popup - request the user to sign and broadcast the transaction
-     await ethereum.request({
+    const transactionHash = await ethereum.request({
         method: 'eth_sendTransaction',
         params: [transactionParameters],
     });
 
-    console.log("Transaction Complete");
+
+    const receipt = await web3.eth.getTransactionReceipt(transactionHash);
+
+    console.log("status: ",receipt.status);
+    if (receipt.status == "0x1"){
+      console.log("Transaction Complete");
+    }else {
+      console.log("Transaction Failed");
+    }
+
     } catch(error){
         console.log("Error: ",error);
     }
