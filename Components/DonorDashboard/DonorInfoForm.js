@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import React from 'react';
 
-function DonorInfoForm() {
+const DonorInfoForm = (donorData) => {
+  console.log(donorData.data[2]);
   const [donor, setDonor] = useState({
-    bloodType: 'a+',
-    organType: 'kidney',
-    name: 'John Doe',
-    contact: '1234567890',
-    donorId: '#18the98best876dancer'
+    bloodType: donorData.data[6],
+    organType: donorData.data[7],
+    name: donorData.data[2],
+    contact: donorData.data[4],
+    donorId: donorData.data[0]
   });
 
   const handleChange = (event) => {
