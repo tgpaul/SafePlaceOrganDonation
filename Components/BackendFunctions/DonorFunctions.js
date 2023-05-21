@@ -123,3 +123,44 @@ export async function GetDonorFunction(){
     }
 }
 
+export async function RegisterDonorFunction( bloodType, organType){
+    try{
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+        donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
+
+        const transactionParameters = {
+            from: accounts[0],
+            to: DonorContract.address,
+            data: donorContract.methods.DonorRegistration(
+                bloodType,
+                organType
+            ).encodeABI(),
+            gasPrice: '3000000000',
+        };
+
+        const transactionHash = await ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [transactionParameters],
+        });
+
+        const receipt = await web3.eth.getTransactionReceipt(transactionHash);
+
+        // console.log("status: ",receipt.status);
+        if (receipt.status == "0x1"){
+            console.log("Transaction Complete");
+            // Route to 'DonorDashboard2' page
+            Router.push('/DonorDashboard2');
+        }else {
+            console.log("Transaction Failed");
+        } 
+
+
+        
+
+    }catch (error) {
+        console.log('Error: ', error);
+        return null;
+    }
+}

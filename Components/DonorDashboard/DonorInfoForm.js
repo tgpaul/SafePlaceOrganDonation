@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import React from 'react';
+import { RegisterDonorFunction } from '../BackendFunctions/donorfunctions';
 
 const DonorInfoForm = (donorData) => {
-  console.log(donorData.data[2]);
+  // console.log(donorData.data[2]);
   const [donor, setDonor] = useState({
     bloodType: donorData.data[6],
     organType: donorData.data[7],
@@ -12,21 +13,23 @@ const DonorInfoForm = (donorData) => {
   });
 
   const handleChange = (event) => {
-    setDonor({ ...donor, [event.target.name]: event.target.value });
-    if (event.target.name === 'name') {
-      setDonorName(event.target.value);
-    }
+    const { name, value } = event.target;
+    setDonor((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
   };
   
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    saveDonorDetails(donor);
+    const test = await RegisterDonorFunction(donor.bloodType, donor.organType);
+    // saveDonorDetails(donor);
   };
 
-  const saveDonorDetails = (donorData) => {
-    console.log('Saving donor details:', donorData);
-  };
+  // const saveDonorDetails = (donorData) => {
+  //   console.log('Saving donor details:', donorData);
+  // };
 
   const isDisabled = donor.bloodType !== '' && donor.organType !== '';
 
