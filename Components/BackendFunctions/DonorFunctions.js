@@ -1,6 +1,6 @@
+import Router from 'next/router';
 const Web3 = require('web3');
 const DonorContract = require('../../blockchain/build-info/DonorContract.json');
-import { useRouter } from 'next/router';
 
 let accounts, web3, donorContract;
 
@@ -55,11 +55,12 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
         console.log("status: ",receipt.status);
         if (receipt.status == "0x1"){
         console.log("Transaction Complete");
+        // Route to 'DonorDashboard2' page
+        Router.push('/DonorDashboard2');
         }else {
         console.log("Transaction Failed");
         }
-        const router = useRouter();
-        router.push('/DonorDashboard2');
+
         } catch(error){
             console.log("Error: ",error);
         }
@@ -91,15 +92,34 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
 
             console.log("status: ",receipt.status);
             if (receipt.status == "0x1"){
-            console.log("Transaction Complete");
+                console.log("Transaction Complete");
+                // Route to 'DonorDashboard2' page
+                Router.push('/DonorDashboard2');
             }else {
-            console.log("Transaction Failed");
+                console.log("Transaction Failed");
             } 
-
-            const router = useRouter();
-            router.push('/DonorDashboard2');
             
         }catch(error){
             console.log("Error: ",error);
         }
     }
+
+
+export async function GetDonorFunction(){
+    try{
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+        donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
+        
+        const donorDetails = await donorContract.methods.GetDonorDetails(accounts[0]).call();
+        console.log(donorDetails);     
+
+        return donorDetails;
+
+    }catch (error) {
+        console.log('Error: ', error);
+        return null;
+    }
+}
+
