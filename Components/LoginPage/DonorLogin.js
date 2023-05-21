@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Web3 from 'web3';
 
-
+import {DonorLoginFunction} from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg'
 import connectMetamask from './metamask-connection';
@@ -55,9 +55,18 @@ function DonorLogin() {
   //   connectMetamask();
   // };
 
-  const handleLogin = () => {
-    // Add logic to handle signup
-    console.log(email);
+  const [state, setState] = React.useState({
+    email: ''
+  });
+
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const {email} = state;
+
+    // Call signFunction with form values as parameters
+    const test = await DonorLoginFunction(email);
+    console.log(state);
   };
 
     return (
