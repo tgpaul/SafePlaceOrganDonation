@@ -1,59 +1,52 @@
 import React from 'react';
-import { signIn } from "next-auth/react";
-import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
-import { useRouter } from "next/router";
-import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import SignUpFunction from '../BackendFunctions/donorfunctions';
+import { useState, useEffect } from 'react';
+import Web3 from 'web3';
+// import connectWallet from './metamaskConnection';
+
+// import { signIn } from "next-auth/react";
+// import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+// import { useRouter } from "next/router";
+// import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
+// import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+// // import SignUpFunction from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg';
 
 function DonorSignup() {
-  const { connectAsync } = useConnect();
-  const { disconnectAsync } = useDisconnect();
-  const { isConnected } = useAccount();
-  const { signMessageAsync } = useSignMessage();
-  const { requestChallengeAsync } = useAuthRequestChallengeEvm();
-  const { push } = useRouter();
+  const [connected, setConnected] = useState(false);
+  const [account, setAccount] = useState('');
+  const [balance, setBalance] = useState('');
 
-  const handleAuth = async () => {
+  const connectWallet = async () => {
     try {
-      if (isConnected) {
-        await disconnectAsync();
+      if (window.ethereum) {
+        const web3 = new Web3(window.ethereum);
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        setConnected(true);
+        setAccount(account);
+        const button = document.getElementById("authButton");
+        if (button) {
+          button.style.borderColor = "green";
+          button.style.backgroundColor = "#cdffcc";
+        }
+        console.log(account);
+        const weiBalance = await web3.eth.getBalance(account);
+        const etherBalance = web3.utils.fromWei(weiBalance, 'ether');
+        setBalance(etherBalance);
+      } else {
+        console.log('No Ethereum browser extension detected');
       }
-
-      const { account, chain } = await connectAsync({
-        connector: new MetaMaskConnector(),
-      });
-
-      const { message } = await requestChallengeAsync({
-        address: account,
-        chainId: chain.id,
-      });
-      
-
-      const signature = await signMessageAsync({ message });
-      console.log(account);
-
-      const { url } = await signIn("moralis-auth", {
-        message,
-        signature,
-        redirect: false,
-        callbackUrl: "/user",
-      });
-      const button = document.getElementById("authButton");
-      if (button) {
-        button.style.borderColor = "green";
-        button.style.backgroundColor = "#cdffcc"
-      }
-      
-
-      push(url);
-      
     } catch (error) {
-      console.log("Error:", error);
+      console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on('connect', connectWallet);
+    }
+  }, []);
 
   const [state, setState] = React.useState({
     firstname: '',
@@ -107,7 +100,7 @@ function DonorSignup() {
           <p><input className='residential-address-input' type="text" value={address} name="address" onChange={handleChange} /></p>
         </label>
       </form>
-      <button id="authButton" className='metamask-button' onClick={handleAuth}>
+      <button id="authButton" className='metamask-button' onClick={connectWallet}>
         <img src={metamask_logo} width="30" height="30" className="metamasklogo" alt="" /> Connect <span>Metamask</span>
       </button>
       <br></br>
