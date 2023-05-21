@@ -8,7 +8,7 @@ import Web3 from 'web3';
 // import { useRouter } from "next/router";
 // import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
 // import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import DonorSignUpFunction from '../BackendFunctions/donorfunctions';
+import {DonorSignUpFunction} from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg';
 
@@ -64,12 +64,12 @@ function DonorSignup() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const { firstname, lastname, phoneNumber, email, address } = state;
 
     // Call signFunction with form values as parameters
-    DonorSignUpFunction(firstname, lastname, phoneNumber, email, address);
+    const test = await DonorSignUpFunction(firstname, lastname, phoneNumber, email, address);
     console.log(state);
   };
 
