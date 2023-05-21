@@ -8,7 +8,7 @@ import Web3 from 'web3';
 // import { useRouter } from "next/router";
 // import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
 // import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-// // import SignUpFunction from '../BackendFunctions/donorfunctions';
+import SignUpFunction from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg';
 
@@ -69,7 +69,7 @@ function DonorSignup() {
     const { firstname, lastname, phoneNumber, email, address } = state;
 
     // Call signFunction with form values as parameters
-    //SignUpFunction(account, firstname, lastname, phoneNumber, email, address);
+    SignUpFunction(firstname, lastname, phoneNumber, email, address);
     console.log(state);
   };
 
