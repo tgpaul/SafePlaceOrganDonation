@@ -5,7 +5,7 @@ let logo = '/MainLogo.png';
 
 import Link from 'next/link';
 
-function SideNavbar() {
+const SideNavbar = (props) => {
     return (
       <div className="sidenav">
         <div className="sidenav-logo">
@@ -13,7 +13,7 @@ function SideNavbar() {
         </div>
         <div className="profile">
           <img src= {profile_pic} alt="Profile Photo" />
-          <h3>Alby Johnson</h3>
+          <h3>{props.name}</h3>
         </div>
         <ul className="nav-links">
           <li>
