@@ -1,5 +1,6 @@
 const Web3 = require('web3');
 const DonorContract = require('../../blockchain/build-info/DonorContract.json');
+import { useRouter } from 'next/router';
 
 let accounts, web3, donorContract;
 
@@ -57,7 +58,8 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
         }else {
         console.log("Transaction Failed");
         }
-
+        const router = useRouter();
+        router.push('/DonorDashboard2');
         } catch(error){
             console.log("Error: ",error);
         }
@@ -93,6 +95,9 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
             }else {
             console.log("Transaction Failed");
             } 
+
+            const router = useRouter();
+            router.push('/DonorDashboard2');
             
         }catch(error){
             console.log("Error: ",error);
