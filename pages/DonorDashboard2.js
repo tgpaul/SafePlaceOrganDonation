@@ -3,7 +3,7 @@ import DonorInfoForm from '../Components/DonorDashboard/DonorInfoForm';
 import DonorMatch_NotFound from '../Components/DonorDashboard/DonorMatch_NotFound';
 import DonorMatch_Found from '../Components/DonorDashboard/DonorMatch_Found';
 import React, { useEffect, useState } from 'react';
-import { GetDonorFunction } from '../Components/BackendFunctions/donorfunctions';
+import { GetDonorFunction } from '../BackendFunctions/DonorFunctions';
 
 let MatchFound = 0;
 
