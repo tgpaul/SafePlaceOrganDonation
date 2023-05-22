@@ -1,3 +1,7 @@
+button {
+    cursor: pointer;
+}
+
 .Hospital_Dashboard_Page{
     display: flex;
     flex-direction: row;
@@ -32,7 +36,7 @@
 
 .Sidenav_buttons:hover {
     background-color: rgba(215, 234, 255, 0.9);
-   
+    cursor: pointer;  
 
 
 }
@@ -45,10 +49,11 @@
 
 .Table-container {
     margin-left: 17rem;
-    margin-top: 4rem;
-    flex: 1;
-    margin-right:7rem;
+    width: 100%;
+    margin-top: 6rem;
+    
 }
+
 
 
 
@@ -56,17 +61,14 @@
 
 table {
     border-collapse: collapse; 
-    margin-top: 0px;
-    margin-left: 30px;
 }
    
 /* .table-wrap {
 } */
   
 .table {
-    min-width: 1000px !important;
-    width: 100%;
     background: #fff; 
+    width: 98%;
 }
 
 .table thead.thead-primary {
@@ -82,9 +84,9 @@ table {
       text-align: left;
 }
 
-.table tbody tr {
+/* .table tbody tr {
       margin-bottom: 10px; 
-}
+} */
 
 .table tbody th, .table tbody td {
       border: none;
@@ -95,56 +97,15 @@ table {
 
 /* seacrch box */
 
-.search-bar {
-    display: block;
-    width: 30rem;
-    font-size: 14px;
-    font-weight: normal;
-    color: #000000;
-    padding: 10px;
-    border: 2px solid #d4c4fc;
-    margin-bottom: 15px;
-    margin-left: 20px;
-}
-
-
-
-
-/* Add user button */
-.search-container{
-    width:500px;
+.search-container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    
-
-}
-.search-container input[type="text"] {
-  display:inline-block;
-  flex: 1;
-  
+    width: 98%;
+    margin-bottom: 2rem;
 }
 
-.search-container input[type="text"] {
-  width: 18%;
- 
-  padding-right: 400px;
-  border: 1px solid #adbedb;
-  border-radius: 8px;
-  margin-left: 30px;
-  padding-bottom: 12px;
-}
 
-.search-container button {
-  width: 18%;
-  background-color: #247DFF;
-  color: white;
-  padding-right: 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
- white-space: nowrap; 
- 
-}
 #action{
     background-color: #247Dff;
     color: #fff;
@@ -154,13 +115,85 @@ table {
     padding-right:10px;
 }
 .add{
-    width: 100px;
     height: 40px;
     padding: 10px;
-    margin-right: 10px;
     border: none;
-  border-radius: 8px;
-    flex: 1;
-    margin-left: 63rem;
+    border-radius: 8px;
+    background-color: #1089ff;
+    color: #fff;
+    
    
 }
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    
+   
+}
+.popup-content {
+    background-color: #fff;
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+
+}
+
+.popup-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+    width: 90%;
+
+}
+
+.popup-grid input {
+    align-content: center;
+    justify-content: center;
+    background: #E2E2E2;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cacaca;
+    height: 2rem;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.popup-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.popup-button-container button {
+    color: #1089ff;
+    font-weight: bold;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    border:#1089ff;
+    border-width: 1px;
+    border-style: solid;
+    width: 10rem;
+    height: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+

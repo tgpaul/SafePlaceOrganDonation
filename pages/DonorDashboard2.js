@@ -3,8 +3,14 @@ import DonorInfoForm from '../Components/DonorDashboard/DonorInfoForm';
 import DonorMatch_NotFound from '../Components/DonorDashboard/DonorMatch_NotFound';
 import DonorMatch_Found from '../Components/DonorDashboard/DonorMatch_Found';
 import React, { useEffect, useState } from 'react';
+
 import { GetDonorDetailsFunction } from '../Components/BackendFunctions/donorfunctions';
 import { GetRecipientDetails, GetHospitalDetailsFunction } from '../Components/BackendFunctions/HospitalFunctions';
+
+import { GetDonorFunction } from '../BackendFunctions/DonorFunctions';
+
+let MatchFound = 0;
+
 
 function DonorDashboardBody() {
   const [donorData, setDonorData] = useState(null);
