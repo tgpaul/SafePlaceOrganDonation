@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Web3 from 'web3';
 
-import {DonorLoginFunction} from '../BackendFunctions/DonorFunctions';
+import {DonorLoginFunction} from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg'
 import connectMetamask from './metamask-connection';
