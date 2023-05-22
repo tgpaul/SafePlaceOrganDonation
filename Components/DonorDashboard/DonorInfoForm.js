@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
-import { RegisterDonorFunction } from '../BackendFunctions/donorfunctions';
+import { RegisterDonorFunction } from '../BackendFunctions/DonorFunctions';
 
 const DonorInfoForm = (donorData) => {
    // console.log("Name",donorData.data[2]);
