@@ -4,7 +4,8 @@ import DonorMatch_NotFound from '../Components/DonorDashboard/DonorMatch_NotFoun
 import DonorMatch_Found from '../Components/DonorDashboard/DonorMatch_Found';
 import React, { useEffect, useState } from 'react';
 
-import { GetDonorDetailsFunction } from '../Components/BackendFunctions/donorfunctions';
+import { GetDonorDetailsFunction } from '../Components/BackendFunctions/DonorFunctions';
+
 import { GetRecipientDetails, GetHospitalDetailsFunction } from '../Components/BackendFunctions/HospitalFunctions';
 
 import { GetDonorFunction } from '../BackendFunctions/DonorFunctions';
