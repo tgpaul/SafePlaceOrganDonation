@@ -8,8 +8,6 @@ import { GetDonorDetailsFunction } from '../Components/BackendFunctions/DonorFun
 
 import { GetRecipientDetails, GetHospitalDetailsFunction } from '../Components/BackendFunctions/HospitalFunctions';
 
-import { GetDonorFunction } from '../BackendFunctions/DonorFunctions';
-
 let MatchFound = 0;
 
 
