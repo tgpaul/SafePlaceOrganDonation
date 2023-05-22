@@ -28,7 +28,7 @@ const DonorList = ({donorlist}) =>{
               <td>{item.phoneNumber}</td>
               <td>{item.email}</td>
               <td>
-                <button id = "action">Action</button>
+                <button id = "action">Find Match</button>
               </td>
             </tr>
           ))}

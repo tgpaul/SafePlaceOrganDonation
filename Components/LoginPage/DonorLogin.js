@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Web3 from 'web3';
 
-
+import {DonorLoginFunction} from '../BackendFunctions/donorfunctions';
 
 let metamask_logo = '/metamask-icon.svg'
 import connectMetamask from './metamask-connection';
@@ -44,10 +44,18 @@ function DonorLogin() {
     }
   }, []);
 
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
+
+  const [state, setState] = React.useState({
+    email: ''
+  });
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   // const handleConnectWallet = () => {
@@ -55,9 +63,16 @@ function DonorLogin() {
   //   connectMetamask();
   // };
 
-  const handleLogin = () => {
-    // Add logic to handle signup
-    console.log(email);
+  
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const {email} = state;
+
+    console.log(state)
+    // Call signFunction with form values as parameters
+    const test = await DonorLoginFunction(email);
+    console.log(state);
   };
 
     return (
@@ -66,7 +81,7 @@ function DonorLogin() {
             <form className='LogDonor'>
               <h1>Login as a Donor</h1>
               <label className='LogDonorFields'> Email Address:</label>
-              <input className='LogDonorFields' id='Email-logDonor' type="email" placeholder="enter you email address" value={email} onChange={handleEmailChange} />
+              <input className='LogDonorFields' id='Email-logDonor' type="email" placeholder="enter you email address" value={state.email} name="email" onChange={handleEmailChange} />
               <label className='LogDonorFields'>Connect Metamask Wallet:</label>
               <button className='LogDonorFields' id ='metamask-button' type="button" onClick={connectWallet}> <img src={metamask_logo} width = "30" />  MetaMask</button>
               <button className='LogDonorFields' id='log-but' type="button" onClick={handleLogin}>Login</button>
