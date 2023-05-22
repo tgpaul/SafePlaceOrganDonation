@@ -105,7 +105,7 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
     }
 
 
-export async function GetDonorFunction(){
+export async function GetDonorDetailsFunction(){
     try{
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
@@ -113,7 +113,7 @@ export async function GetDonorFunction(){
         donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
         
         const donorDetails = await donorContract.methods.GetDonorDetails(accounts[0]).call();
-        console.log(donorDetails);     
+        // console.log(donorDetails);     
 
         return donorDetails;
 

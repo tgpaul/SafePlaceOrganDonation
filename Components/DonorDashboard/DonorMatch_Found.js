@@ -1,18 +1,24 @@
-
+import React, { useState, useEffect } from 'react';
 import RecipeintMatchDetails from "./RecipeintMatchDetails"
 
-function DonorMatch_Found(){
+const DonorMatch_Found = ({recipientData, hospitalData}) =>{
+  // const [recipient, setRecipient] = useState(null);
+  console.log("Recipient data inside match: ",recipientData)
+  console.log("Hospital data inside match: ",hospitalData)
+  // useEffect(() => {
+  //   if (recipientData && hospitalData) {
+  //     setRecipient({
+  //       phoneNumber: recipientData[4],
+  //       idCode: recipientData[0],
+  //       bloodType: recipientData[5],
+  //       organs: recipientData[6],
+  //       hospitalName: hospitalData[2],
+  //       hospitalPhoneNumber: hospitalData[4],
+  //       // profile_pic : hospitalData[]
+  //     });
+  //   }
+  // }, [recipientData, hospitalData]);
 
-
-    const Recipient = {
-        phoneNumber: '+91 83838 12131',
-        idCode: '#causss',
-        bloodType: 'AB Positive',
-        organs: 'Heart, Liver',
-        hospitalName: 'Baby Memorial Hospital',
-        hospitalPhoneNumber: '+91 91231 21321',
-        profile_pic : "/profile.svg"
-      };
       
 
     return (
@@ -21,10 +27,14 @@ function DonorMatch_Found(){
             <h1 className="card-heading">Matching Details</h1>
             <div className="recipientCard">
                 <h1>RECIPIENT DETAILS</h1>
-                <img src= {Recipient.profile_pic} alt="Donor Photo" />
-                <h3>Princy Sugahthan</h3>
+                {/* <img src= {Recipient.profile_pic} alt="Donor Photo" /> */}
+                <h3>
+                  <div className="slot">
+                    <p className="slot_text">{recipientData[1]}</p>
+                  </div>
+                </h3>
                 <div className="detail_slots">
-                    <RecipeintMatchDetails Recipient={Recipient}/>
+                    <RecipeintMatchDetails recipientData={recipientData} hospitalData = {hospitalData}/>
                 </div>
             </div>
           </div>
@@ -32,5 +42,4 @@ function DonorMatch_Found(){
       );
 
 }
-
 export default DonorMatch_Found;
