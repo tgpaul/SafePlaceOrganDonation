@@ -66,7 +66,7 @@
 					"type": "uint256"
 				}
 			],
-			"stateMutability": "nonpayable",
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -227,7 +227,7 @@
 					"type": "uint256"
 				}
 			],
-			"stateMutability": "nonpayable",
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -240,107 +240,77 @@
 					"type": "uint256"
 				}
 			],
-			"stateMutability": "nonpayable",
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
-			"anonymous": false,
 			"inputs": [
 				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "_addr",
+					"type": "address"
 				}
 			],
-			"name": "GetDonorCountEvent",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+			"name": "GetDonorDetails",
+			"outputs": [
 				{
-					"indexed": false,
 					"internalType": "uint256",
 					"name": "",
 					"type": "uint256"
 				},
 				{
-					"indexed": false,
 					"internalType": "address",
 					"name": "",
 					"type": "address"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "string",
 					"name": "",
 					"type": "string"
 				},
 				{
-					"indexed": false,
 					"internalType": "uint256",
 					"name": "",
 					"type": "uint256"
 				},
 				{
-					"indexed": false,
 					"internalType": "uint256",
 					"name": "",
 					"type": "uint256"
 				}
 			],
-			"name": "GetDonorEvent",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
-				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"name": "TaskCompletedEvent",
-			"type": "event"
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
 			"inputs": [
@@ -429,76 +399,7 @@
 			],
 			"stateMutability": "view",
 			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_addr",
-					"type": "address"
-				}
-			],
-			"name": "GetDonorDetails",
-			"outputs": [
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				},
-				{
-					"internalType": "address",
-					"name": "",
-					"type": "address"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "string",
-					"name": "",
-					"type": "string"
-				},
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				},
-				{
-					"internalType": "uint256",
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"stateMutability": "view",
-			"type": "function"
 		}
 	],
-    "address": "0x5e9253916068Fa7a7eE7AdD66470D440a502d9ce"
+    "address": "0x9B1aD36A11BF43dbA7945617e3D8c25aF04D72ca"
   }

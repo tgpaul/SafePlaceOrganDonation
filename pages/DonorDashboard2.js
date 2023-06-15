@@ -3,9 +3,7 @@ import DonorInfoForm from '../Components/DonorDashboard/DonorInfoForm';
 import DonorMatch_NotFound from '../Components/DonorDashboard/DonorMatch_NotFound';
 import DonorMatch_Found from '../Components/DonorDashboard/DonorMatch_Found';
 import React, { useEffect, useState } from 'react';
-
 import { GetDonorDetailsFunction } from '../Components/BackendFunctions/DonorFunctions';
-
 import { GetRecipientDetails, GetHospitalDetailsFunction } from '../Components/BackendFunctions/HospitalFunctions';
 
 let MatchFound = 0;
@@ -21,9 +19,10 @@ function DonorDashboardBody() {
   useEffect(() => {
     async function fetchData() {
       try {
+        console.log("here 1");
         const donorData = await GetDonorDetailsFunction();
         setDonorData(donorData);
-        console.log('DONOR:', donorData);
+        console.log('donorData in DonorDashboard:', donorData);
 
         if (donorData && donorData[9] !== '0' && donorData[10] !== '0') {
           setMatchFound(true);

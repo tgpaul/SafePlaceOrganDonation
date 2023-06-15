@@ -1,6 +1,7 @@
 import Router from 'next/router';
 const Web3 = require('web3');
 const DonorContract = require('../../blockchain/build-info/DonorContract.json');
+const RPC_URL = "HTTP://127.0.0.1:7545";
 
 let accounts, web3, donorContract;
 
@@ -16,7 +17,7 @@ async function init(){
 
     // using web3 just as a helper to generate the transaction
     // (see the `data` field and `encodeABI`) - not to sign it
-    web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
     donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
 }
 
@@ -27,7 +28,7 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
 
         // using web3 just as a helper to generate the transaction
         // (see the `data` field and `encodeABI`) - not to sign it
-        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
 
         const transactionParameters = {
@@ -71,7 +72,7 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
         try{
             accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
-            web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+            web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
             donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
 
             const transactionParameters = {
@@ -109,11 +110,11 @@ export async function GetDonorDetailsFunction(){
     try{
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
-        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
         
         const donorDetails = await donorContract.methods.GetDonorDetails(accounts[0]).call();
-        // console.log(donorDetails);     
+        console.log-("donorData inside the GetDonorDetailsFunction",donorDetails);     
 
         return donorDetails;
 
@@ -127,7 +128,7 @@ export async function RegisterDonorFunction( bloodType, organType){
     try{
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
-        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
 
         const transactionParameters = {
