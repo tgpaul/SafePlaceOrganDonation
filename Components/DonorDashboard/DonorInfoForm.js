@@ -3,7 +3,7 @@ import React from 'react';
 import { RegisterDonorFunction } from '../BackendFunctions/donorfunctions';
 
 const DonorInfoForm = (donorData) => {
-   // console.log("Name",donorData.data[2]);
+  console.log("donorData inside DonorInfoForm",donorData);
   const [donor, setDonor] = useState({
     bloodType: donorData.data[6],
     organType: donorData.data[7],
