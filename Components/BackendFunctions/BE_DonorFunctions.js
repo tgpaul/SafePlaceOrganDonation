@@ -2,6 +2,7 @@ import Router from 'next/router';
 const Web3 = require('web3');
 const DonorContract = require('../../blockchain/build-info/DonorContract.json');
 const RPC_URL = "HTTP://127.0.0.1:7545";
+//const RPC_URL = "https://rpc.sepolia.org";
 
 let accounts, web3, donorContract;
 

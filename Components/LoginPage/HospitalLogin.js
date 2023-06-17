@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Web3 from 'web3';
 
+import { GetHospitalDetailsFunction } from '../BackendFunctions/BE_HospitalFunctions'; 
+
 let metamask_logo = '/metamask-icon.svg'
 
 
@@ -23,7 +25,6 @@ function HospitalLogin() {
           button.style.borderColor = "green";
           button.style.backgroundColor = "#cdffcc";
         }
-        console.log(account);
         const weiBalance = await web3.eth.getBalance(account);
         const etherBalance = web3.utils.fromWei(weiBalance, 'ether');
         setBalance(etherBalance);
@@ -41,19 +42,26 @@ function HospitalLogin() {
     }
   }, []);
 
-  const [HospitalID, setHospitalID] = useState('');
+  const [state, setState] = React.useState({
+    HospitalID: ''
+  });
 
   const handleHospitalIDChange = (event) => {
-    setHospitalID(event.target.value);
+    const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  // const handleConnectWallet = () => {
-  //   // Add logic to connect to Metamask wallet
-  //   connectMetamask();
-  // };
 
-  const handleLogin = () => {
-    // Add logic to handle signup
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const {HospitalID} = state;
+
+    // Call signFunction with form values as parameters
+    const test = await HospitalLoginFunction(Number(HospitalID));
+    console.log("HERE : ",test);
   };
 
 
@@ -64,7 +72,7 @@ function HospitalLogin() {
             <form className='LogHospital'>
               <h1>Hostpital Login</h1>
               <label className='LogHospitalFields'> Hospital ID:</label>
-              <input className='LogHospitalFields' id='Email-logDonor' type="email" placeholder="Enter your Hospital ID" value={HospitalID} onChange={handleHospitalIDChange} />
+              <input className='LogHospitalFields' id='Email-logDonor' type="email" placeholder="Enter your Hospital ID" value={state.HospitalID} name = "HospitalID" onChange={handleHospitalIDChange} />
               <label className='LogHospitalFields'>Connect Metamask Wallet:</label>
               <button className='LogHospitalFields' id ='metamask-button' type="button" onClick={connectWallet} > <img src={metamask_logo} width = "30" />  MetaMask</button>
               <button className='LogHospitalFields' id='log-but' type="button" onClick={handleLogin} >Login</button>

@@ -8,7 +8,7 @@ import Web3 from 'web3';
 // import { useRouter } from "next/router";
 // import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
 // import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import {DonorSignUpFunction} from '../BackendFunctions/donorfunctions';
+import {DonorSignUpFunction} from '../BackendFunctions/BE_DonorFunctions';
 
 let metamask_logo = '/metamask-icon.svg';
 
