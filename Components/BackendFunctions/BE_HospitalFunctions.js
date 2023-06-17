@@ -1,6 +1,8 @@
 import Router from 'next/router';
 const Web3 = require('web3');
 const HospitalContract = require('../../blockchain/build-info/HospitalRecipientContract.json');
+const RPC_URL = "HTTP://127.0.0.1:7545";
+//const RPC_URL = "https://rpc.sepolia.org";
 
 let accounts, web3, hospitalContract;
 
@@ -11,14 +13,14 @@ let accounts, web3, hospitalContract;
 
 async function init(){
     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
     hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
 }
 
 export async function GetRecipientDetails( recipientID ){
     try{
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
 
         const recipientDetails = await hospitalContract.methods.GetRecipient(recipientID).call();
@@ -30,17 +32,30 @@ export async function GetRecipientDetails( recipientID ){
     }
 }
 
-export async function GetHospitalDetailsFunction( hospitalID ){
+export async function GetHospitalDetailsFunction( _hospitalID ){
     try{
+        const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+        const hospitalContract = new web3.eth.Contract(
+            HospitalContract.abi,
+            HospitalContract.address
+        );
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
-        console.log("hospiotal details1: ");  
-        hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
-        console.log("hospiotal details2: "); 
-        const hospitalDetails = await hospitalContract.methods.GetHospital(hospitalID).call();
-        console.log("hospiotal details3: ",hospitalDetails);
+        let result = null;
+        result = await hospitalContract.methods.HospitalLogin(_hospitalID).call({
+            from: accounts[0]
+        });
+        console.log("Account: ",accounts[0]);
+        console.log("Result: ",result);
 
-        return hospitalDetails;
+        if (result[0] != 0) {
+            console.log("Contract call successful");
+            Router.push("/HospitalDashboard");
+          } else {
+            console.log("Contract call failed");
+          }
+        
+        console.log("BE FUNCTIONS : ",result);
+        return result;
     }catch(error){
         console.log("Error: ", error);
     }
