@@ -4,8 +4,8 @@ import { RegisterDonorFunction } from '../BackendFunctions/BE_DonorFunctions';
 
 const DonorInfoForm = (donorData) => {
   const [donor, setDonor] = useState({
-    bloodType: donorData.data[6],
-    organType: donorData.data[7],
+    bloodType: donorData.data[7],
+    organType: donorData.data[8],
     name: donorData.data[2],
     contact: donorData.data[4],
     donorId: donorData.data[0]
@@ -64,6 +64,7 @@ const DonorInfoForm = (donorData) => {
           id="blood"
           value={donor.bloodType}
           onChange={handleChange}
+          disabled={isDisabled}
         >
           <option value="">Select</option>
           <option value="a+">A+</option>
@@ -86,6 +87,7 @@ const DonorInfoForm = (donorData) => {
           id="organ"
           value={donor.organType}
           onChange={handleChange}
+          disabled={isDisabled}
         >
           <option value="">Select</option>
           <option value="kidney">Kidney</option>
@@ -95,7 +97,7 @@ const DonorInfoForm = (donorData) => {
         </select>
       </div>
 
-      <button type="submit" className="save-button">
+      <button type="submit" className="save-button"  disabled={isDisabled} >
         <span>Save</span>
       </button>
     </form>
