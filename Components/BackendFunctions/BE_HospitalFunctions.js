@@ -1,4 +1,5 @@
 import Router from 'next/router';
+import { useState } from 'react';
 const Web3 = require('web3');
 const HospitalContract = require('../../blockchain/build-info/HospitalRecipientContract.json');
 const RPC_URL = "HTTP://127.0.0.1:7545";
@@ -11,11 +12,7 @@ let accounts, web3, hospitalContract;
  * 1. 
  **/
 
-async function init(){
-    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
-    hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
-}
+let currentHospitalID = null;
 
 export async function GetRecipientDetails( recipientID ){
     try{
@@ -23,8 +20,10 @@ export async function GetRecipientDetails( recipientID ){
         web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
 
-        const recipientDetails = await hospitalContract.methods.GetRecipient(recipientID).call();
-        // console.log(recipientDetails);     
+        const recipientDetails = await hospitalContract.methods.GetRecipient(recipientID).call({
+            from: accounts[0]
+        });    
+        console.log("Recipient: ", recipientDetails);
 
         return recipientDetails;
     }catch(error){
@@ -32,7 +31,7 @@ export async function GetRecipientDetails( recipientID ){
     }
 }
 
-export async function GetHospitalDetailsFunction( _hospitalID ){
+export async function HospitalLoginFunction( hospitalID ){
     try{
         const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         const hospitalContract = new web3.eth.Contract(
@@ -40,23 +39,99 @@ export async function GetHospitalDetailsFunction( _hospitalID ){
             HospitalContract.address
         );
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+        currentHospitalID = hospitalID;
+        console.log("Current ID inside : ",currentHospitalID);
+
+
         let result = null;
-        result = await hospitalContract.methods.HospitalLogin(_hospitalID).call({
+        result = await hospitalContract.methods.HospitalLogin(currentHospitalID).call({
             from: accounts[0]
         });
-        console.log("Account: ",accounts[0]);
-        console.log("Result: ",result);
 
         if (result[0] != 0) {
-            console.log("Contract call successful");
-            Router.push("/HospitalDashboard");
+            console.log("Contract call successful", currentHospitalID);
+            Router.push('/HospitalDashboard');
           } else {
             console.log("Contract call failed");
           }
         
-        console.log("BE FUNCTIONS : ",result);
-        return result;
     }catch(error){
         console.log("Error: ", error);
     }
 }
+
+export async function getHospitalID(){
+    return currentHospitalID;  
+}
+
+export async function GetHospitalDetailsFunction( hospitalID ){
+    const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    const hospitalContract = new web3.eth.Contract(
+        HospitalContract.abi,
+        HospitalContract.address
+    );
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    let result = null;
+    result = await hospitalContract.methods.GetHospital(currentHospitalID).call({
+        from: accounts[0]
+    }); 
+
+    return result;
+}
+
+export async function AddNewRecipient( firstName, lastName, residentialAddress, phoneNumber,  bloodGroup, organNeeded){
+    try{
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+    const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    const hospitalContract = new web3.eth.Contract(
+        HospitalContract.abi,
+        HospitalContract.address
+    );
+
+    console.log("Contract Address: ",HospitalContract.address)
+
+    console.log("GETTER: ",
+        typeof firstName,
+        typeof lastName,
+        typeof bloodGroup,
+        typeof organNeeded,
+        typeof phoneNumber,
+        typeof residentialAddress,
+      );
+
+    const transactionParameters = {
+        from: accounts[0],
+        to: HospitalContract.address,
+        data: hospitalContract.methods.AddRecipient(
+            firstName,
+            lastName,
+            residentialAddress,
+            phoneNumber,
+            bloodGroup,
+            organNeeded
+        ).encodeABI(),
+        gasPrice: '3000000000', // custom gas price
+    };
+
+    const transactionHash = await ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [transactionParameters],
+    });
+
+    const receipt = await web3.eth.getTransactionReceipt(transactionHash);
+
+    if (receipt.status == "0x1"){
+        console.log("Recipient Added");
+
+    }else {
+        console.log("Recipient addition failed!");
+    }
+    }catch(error){
+        console.log("Error: ",error);
+    }
+}   
+
+
+
