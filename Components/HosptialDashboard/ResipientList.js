@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AddNewRecipient } from '../BackendFunctions/BE_HospitalFunctions';
 
 const RecipientList = ({ recipientlist }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -16,7 +17,7 @@ const RecipientList = ({ recipientlist }) => {
   const handleAddRecipient = () => {
     // Here you can perform any necessary actions with the entered recipient details
     // For simplicity, let's just log the details for now
-    console.log({
+    console.log("CALLER: ",{
       firstName,
       lastName,
       bloodGroup,
@@ -24,6 +25,17 @@ const RecipientList = ({ recipientlist }) => {
       phoneNumber,
       residentialAddress,
     });
+
+    AddNewRecipient(
+      firstName,
+      lastName,
+      residentialAddress,
+      phoneNumber,
+      bloodGroup,
+      organNeeded
+    );
+
+    
 
     // Clear the form fields
     setFirstName('');

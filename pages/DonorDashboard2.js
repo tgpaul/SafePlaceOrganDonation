@@ -19,11 +19,9 @@ function DonorDashboardBody() {
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log("here 1");
         const donorData = await GetDonorDetailsFunction();
         setDonorData(donorData);
-        console.log('donorData in DonorDashboard:', donorData);
-
+  
         if (donorData && donorData[9] !== '0' && donorData[10] !== '0') {
           setMatchFound(true);
           const recipientData = await GetRecipientDetails(donorData[10]);

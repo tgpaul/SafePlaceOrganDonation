@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Web3 from 'web3';
 
-import { GetHospitalDetailsFunction } from '../BackendFunctions/BE_HospitalFunctions'; 
+import { HospitalLoginFunction } from '../BackendFunctions/BE_HospitalFunctions';
 
 let metamask_logo = '/metamask-icon.svg'
 
@@ -60,8 +60,7 @@ function HospitalLogin() {
     const {HospitalID} = state;
 
     // Call signFunction with form values as parameters
-    const test = await HospitalLoginFunction(Number(HospitalID));
-    console.log("HERE : ",test);
+    await HospitalLoginFunction(Number(HospitalID));
   };
 
 
