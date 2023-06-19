@@ -8,6 +8,8 @@
   "dependencies": {
     "@moralisweb3/next": "^2.18.2",
     "ethers": "^5.7.2",
+    "intl": "^1.2.5",
+    "intl-locales-supported": "^1.8.12",
     "moralis": "^2.18.2",
     "next": "^13.4.3",
     "next-auth": "^4.22.0",

@@ -1,5 +1,11 @@
 import Router from 'next/router';
 import { useState } from 'react';
+import Intl from 'intl';
+
+
+
+
+
 const Web3 = require('web3');
 const HospitalContract = require('../../blockchain/build-info/HospitalRecipientContract.json');
 const RPC_URL = "HTTP://127.0.0.1:7545";
@@ -157,3 +163,69 @@ export async function GetRecipientDetails( recipientID ){
     }
 }
 
+// Function to create a match
+export async function CreateMatch( 
+        _donorID,
+        _donorName,
+        _recipientID,
+        _recipientName,
+        _organDonated,
+    ){
+    try{
+        // Specify the locales you need
+        const localesNeeded = ['en']; // Add other locales if required
+
+        // Ensure the necessary locale data is loaded
+       
+        const now = new Date();
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        };
+        const _matchTime = now.toLocaleString('en-US', options).replace(',', '');
+        
+        const _status = "Pending";
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+        hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
+
+        const transactionParameters = {
+            from: accounts[0],
+            to: HospitalContract.address,
+            data: hospitalContract.methods.CreateMatch(
+                _donorID,
+                _donorName,
+                _recipientID,
+                _recipientName,
+                _organDonated,
+                _status,
+                _matchTime
+            ).encodeABI(),
+            gasPrice: '3000000000', // custom gas price
+        };
+    
+        const transactionHash = await ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [transactionParameters],
+        });
+    
+        const receipt = await web3.eth.getTransactionReceipt(transactionHash);
+
+        if (receipt.status == "0x1"){
+            console.log("Match Creation was SUCCESSFUL");
+        }else {
+            console.log("Match Creation FAILED!");
+        }
+    }catch(error){
+        console.log("Error: ", error);
+    }
+}
+
+// Function to get list of matchIDs of current hospital
+
+// Function to return match details of a given matchID
+
+// Function that takes the donorID and return corresponding matchID, return 0 if no match present
