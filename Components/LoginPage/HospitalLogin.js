@@ -59,6 +59,8 @@ function HospitalLogin() {
     event.preventDefault();
     const {HospitalID} = state;
 
+    localStorage.setItem("HospitalID", HospitalID);
+
     // Call signFunction with form values as parameters
     await HospitalLoginFunction(Number(HospitalID));
   };

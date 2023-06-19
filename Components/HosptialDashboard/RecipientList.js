@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { AddNewRecipient } from '../BackendFunctions/BE_HospitalFunctions';
+import React, { useState, useEffect } from 'react';
+import { AddNewRecipient, GetRecipientCount, GetRecipientDetails } from '../BackendFunctions/BE_HospitalFunctions';
 
 const RecipientList = ({recipientlist}) => {
+  // let mainRecipientList = [];
+  const [mainRecipientList, setReciepeintList] = useState([]);
+  const [recipientCount, setRecipientCount] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -15,7 +18,54 @@ const RecipientList = ({recipientlist}) => {
     console.log("List ",recipientlist);
   };
 
-  const handleAddRecipient = () => {
+  async function fetchRecipientCount() {
+    const count = await GetRecipientCount();
+    setRecipientCount(count);
+  };
+
+  useEffect(() => {
+    const fetchRecipientDetails = async () => {
+      console.log("count ", recipientCount.length);
+      const recipientDetails = [];
+
+      for( let i = 1;i<5; i++){
+        let data = await GetRecipientDetails(i);
+        if(data){
+          try {
+            let recipientFormat = {
+              recipientID: Number(data[0]),
+              recipientName: data[1] + " " + data[2],
+              recipientResAddress: data[3],
+              recipientContact: data[4],
+              recipientBloodGroup: data[5],
+              recipientOrganNeeded: data[6],
+              recipientDonorID:data[7],
+              recipientHospitalID : data[8]
+            }
+
+            // setReciepeintList([...mainRecipientList, recipientFormat])
+            recipientDetails.push(recipientFormat);
+            console.log("list", recipientFormat);
+          } catch (error) {
+            console.log("error fecting recipent");
+          }
+        }
+      }
+      setReciepeintList(recipientDetails);
+      console.log("mainlist", mainRecipientList);
+      // console.log("temp list " , recipientlist)
+    };
+
+
+    fetchRecipientDetails(); 
+  }, [recipientCount]);
+
+
+  useEffect(() => {
+    fetchRecipientCount();
+  }, []);
+
+  async function handleAddRecipient(){
     // console.log("CALLER: ",{
     //   firstName,
     //   lastName,
@@ -25,7 +75,7 @@ const RecipientList = ({recipientlist}) => {
     //   residentialAddress,
     // });
 
-    AddNewRecipient(
+    await AddNewRecipient(
       firstName,
       lastName,
       residentialAddress,
@@ -43,7 +93,9 @@ const RecipientList = ({recipientlist}) => {
     setOrganNeeded('');
     setPhoneNumber('');
     setResidentialAddress('');
-
+    
+    
+    await fetchRecipientCount();
     // Close the popup
     togglePopup();
   };
@@ -120,7 +172,7 @@ const RecipientList = ({recipientlist}) => {
             </tr>
           </thead>
           <tbody>
-            {recipientlist.map((item, index) => (
+            {mainRecipientList.map((item, index) => (
               <tr key={index}>
                 <td>{item.recipientID}</td>
                 <td>{item.recipientName}</td>
