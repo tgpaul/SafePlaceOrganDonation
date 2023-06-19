@@ -106,7 +106,7 @@ export async function DonorSignUpFunction( firstname, lastname, contact, email, 
         }
     }
 
-
+//This function gets the Donor details by taking the address of the Donor
 export async function GetDonorDetailsFunction(){
     try{
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -114,11 +114,27 @@ export async function GetDonorDetailsFunction(){
         web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
         donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
         
-        const donorDetails = await donorContract.methods.GetDonorDetails(accounts[0]).call();
-        console.log-("donorData inside the GetDonorDetailsFunction",donorDetails);     
+        const donorDetails = await donorContract.methods.GetDonorDetails(accounts[0]).call();     
 
         return donorDetails;
 
+    }catch (error) {
+        console.log('Error: ', error);
+        return null;
+    }
+}
+
+//This function returns the donor details bytaking the donor ID
+export async function GetDonorFunction( ID ){
+    try{
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+        donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
+        
+        const donorDetails = await donorContract.methods.donors(ID).call();     
+        console.log("ID",ID,"GETTER: ",donorDetails);
+        return donorDetails;
     }catch (error) {
         console.log('Error: ', error);
         return null;
@@ -165,4 +181,15 @@ export async function RegisterDonorFunction( bloodType, organType){
         console.log('Error: ', error);
         return null;
     }
+}
+
+export async function GetDonorCount(){
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);    
+
+    const count = await donorContract.methods.GetDonorCount().call();
+
+    return count;
 }

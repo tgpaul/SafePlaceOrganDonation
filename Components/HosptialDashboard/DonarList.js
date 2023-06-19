@@ -23,10 +23,10 @@ const DonorList = ({donorlist}) =>{
             <tr key={index}>
               <td>{item.donorId}</td>
               <td>{item.donorName}</td>
-              <td>{item.organ}</td>
-              <td>{item.bloodGroup}</td>
-              <td>{item.phoneNumber}</td>
-              <td>{item.email}</td>
+              <td>{item.donorOrganToDonate}</td>
+              <td>{item.donorBloodGroup}</td>
+              <td>{item.donorContact}</td>
+              <td>{item.donorEmail}</td>
               <td>
                 <button id = "action">Find Match</button>
               </td>

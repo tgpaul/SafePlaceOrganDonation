@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 import { GetHospitalDetailsFunction, GetHospitalID, GetRecipientCount, GetRecipientDetails } from '../Components/BackendFunctions/BE_HospitalFunctions';
 // import patientList from '../Components/HosptialDashboard/DonarList2';
 import Link from 'next/link';
-import { GetDonorCount, GetDonorDetailsFunction, GetDonorFunction } from '../Components/BackendFunctions/BE_DonorFunctions';
 
 function HospitalDashboard(){
 
@@ -41,33 +40,33 @@ function HospitalDashboard(){
   ];
 
 
-  // const donorList = [
-  //   {
-  //     donorId: 1,
-  //     donorName: "John Doe",
-  //     organ: "Heart",
-  //     bloodGroup: "AB+",
-  //     phoneNumber: "123-456-7890",
-  //     email: "john.doe@example.com"
-  //   },
-  //   {
-  //     donorId: 2,
-  //     donorName: "Jane Smith",
-  //     organ: "Kidney",
-  //     bloodGroup: "O-",
-  //     phoneNumber: "987-654-3210",
-  //     email: "john.doe@example.com"
-  //   },
-  //   {
-  //     donorId: 3,
-  //     donorName: "Alice Johnson",
-  //     organ: "Liver",
-  //     bloodGroup: "A+",
-  //     phoneNumber: "456-789-0123",
-  //     email: "john.doe@example.com"
-  //   },
-  //   // Add more objects as needed
-  // ];
+  const donorList = [
+    {
+      donorId: 1,
+      donorName: "John Doe",
+      organ: "Heart",
+      bloodGroup: "AB+",
+      phoneNumber: "123-456-7890",
+      email: "john.doe@example.com"
+    },
+    {
+      donorId: 2,
+      donorName: "Jane Smith",
+      organ: "Kidney",
+      bloodGroup: "O-",
+      phoneNumber: "987-654-3210",
+      email: "john.doe@example.com"
+    },
+    {
+      donorId: 3,
+      donorName: "Alice Johnson",
+      organ: "Liver",
+      bloodGroup: "A+",
+      phoneNumber: "456-789-0123",
+      email: "john.doe@example.com"
+    },
+    // Add more objects as needed
+  ];
   let recipientID, recipientFirstName, recipientLastName, recipientResAddress, recipientContact, recipientBloodGroup, recipientOrganNeeded, recipientDonorID, recipientHospitalID;
   let recipientFormat;
   let recipientList = [];
@@ -84,21 +83,6 @@ function HospitalDashboard(){
     recipientOrganNeeded,
     recipientDonorID,
     recipientHospitalID
-  }
-
-  let donorID, donorMetaMaskID, donorName, donorContact, donorEmail, donorResAddress, donorBloodGroup, donorOrganToDonate, donorHospitalID, donorRecipientID;
-  let donorFormat;
-  let donorList = [];
-  donorFormat = {
-    donorID,
-    donorMetaMaskID,
-    donorName,
-    donorContact,
-    donorEmail,
-    donorResAddress,
-    donorBloodGroup,
-    donorOrganToDonate,donorHospitalID,
-    donorRecipientID
   }
 
   // const recipientList = [
@@ -149,14 +133,13 @@ function HospitalDashboard(){
   //     setHospitalID(savedHospitalID);
   //   }
   // }, []);
+  
 
-  let storedHospitalData;
   useEffect( ()=>{
     async function fetchHospitalData(){
       try{
         const hospitalData = await GetHospitalDetailsFunction(hospitalID);
         setHospitalData(hospitalData);
-        storedHospitalData = localStorage.getItem('hospitalData');
       } catch(error){
         console.log("Error : ", error);
       }
@@ -168,21 +151,8 @@ function HospitalDashboard(){
     }
   
     fetchHospitalID();
-    fetchHospitalData();
+    fetchHospitalData();    
   },[]);
-
-  if (storedHospitalData) {
-    setHospitalData(JSON.parse(storedHospitalData));
-    console.log("DATA:",hospitalData,"ID:",hospitalID);
-  }
-
-  useEffect(() => {
-    // Update local storage whenever hospitalData changes
-    if(hospitalData){
-      localStorage.setItem('hospitalData', JSON.stringify(hospitalData));
-    }
-  }, [hospitalData]);
-
 
 
   const [page, setPage] = useState("RecipientList");
@@ -193,93 +163,48 @@ function HospitalDashboard(){
 
   useEffect(()=>{
     async function fetchRecipientCount(){
-      const count = await GetRecipientCount();
+      let count = await GetRecipientCount();
       setRecipientCount(count);
+      console.log("Recipient Count:",recipientCount);
       setIsDataFetched(true);
+      
     }
-    fetchRecipientCount();
-  }, [page, isDataFetched]);
 
-  useEffect(()=>{
     async function fetchRecipientData(){
-      if(recipientCount){
-        for( let i=0 ; i<=recipientCount.length ; i++){
-          let data = await GetRecipientDetails(i);
-          // console.log("Recipient",i," ",data);
-          if(data){
-            try{
-              recipientFormat = {
-                recipientID: data[0],
-                recipientName: data[1]+" "+data[2],
-                recipientResAddress: data[3],
-                recipientContact: data[4],
-                recipientBloodGroup: data[5],
-                recipientOrganNeeded: data[6],
-                recipientDonorID: data[7],
-                recipientHospitalID: data[8]
-              };
-              // console.log("Recipient",i," ",recipientFormat);
-  
-              recipientList.push(recipientFormat);
-  
-            } catch(error){
-                console.log("Error:",error);
-            
-            }
-          }
-      }
-    }
-      console.log(recipientList);
-    }
-    
-    fetchRecipientData();
+      console.log("inside:",recipientCount,"Length",recipientCount.length);
+      for( let i=0 ; i<=recipientCount.length ; i++){
+        let data = await GetRecipientDetails(i);
+        // console.log("Recipient",i," ",data);
+        try{
+          recipientFormat = {
+            recipientID: data[0],
+            recipientName: data[1]+data[2],
+            recipientResAddress: data[3],
+            recipientContact: data[4],
+            recipientBloodGroup: data[5],
+            recipientOrganNeeded: data[6],
+            recipientDonorID: data[7],
+            recipientHospitalID: data[8]
+          };
+          // console.log("Recipient",i," ",recipientFormat);
 
-  },[page, recipientCount, isDataFetched]);
+          recipientList.push(recipientFormat);
 
-  const [donorCount,setDonorCount] = useState(null);
-
-  useEffect(()=>{
-    async function fetchDonorCount(){
-      const count = await GetDonorCount();
-      setDonorCount(count);
-    } 
-
-    async function fetchDonorData(){
-      if(donorCount){
-        for( let i=1 ; i<=donorCount ; i++){
-          let data = await GetDonorFunction(i);
-          // console.log("Donor",i,"Data",data);
-          if(data){
-            try{
-              donorFormat = {
-                donorID: data[0],
-                donorMetaMaskID: data[1],
-                donorName: data[2]+" "+data[3],
-                donorContact: data[4],
-                donorEmail: data[5],
-                donorResAddress: data[6],
-                donorBloodGroup: data[7],
-                donorOrganToDonate: data[8],
-                donorHospitalID: data[9],
-                donorRecipientID: data[10]
-              }
-              // console.log("donor",i,"data",donorFormat);
-
-              donorList.push(donorFormat);
-            }catch(error){
-              console.log("Error:", error);
-            }
-          }
+          
+        } catch(error){
+            console.log("Error:",error);
         }
       }
+      console.log(recipientList);
     }
 
-    fetchDonorCount();
-    fetchDonorData();
-  },[page, donorCount]);
-
-
-
+    if (recipientCount === null && !isDataFetched) {
+      fetchRecipientCount();
+    } else if (isDataFetched) {
+      fetchRecipientData();
+    }
+  },[page, recipientCount, isDataFetched]);
+  
   useEffect(() => {
     // This function is called when the component mounts
     // and when the 'page' state changes.
@@ -352,4 +277,4 @@ function HospitalDashboard(){
     );
   }
   
-  export default HospitalDashboard; 
+  export default HospitalDashboard;

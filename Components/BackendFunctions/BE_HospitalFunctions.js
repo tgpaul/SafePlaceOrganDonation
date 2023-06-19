@@ -14,23 +14,6 @@ let accounts, web3, hospitalContract;
 
 let currentHospitalID = null;
 
-export async function GetRecipientDetails( recipientID ){
-    try{
-        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
-        hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
-
-        const recipientDetails = await hospitalContract.methods.GetRecipient(recipientID).call({
-            from: accounts[0]
-        });    
-        console.log("Recipient: ", recipientDetails);
-
-        return recipientDetails;
-    }catch(error){
-        console.log("Error: ", error);
-    }
-}
-
 export async function HospitalLoginFunction( hospitalID ){
     try{
         const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
@@ -61,7 +44,7 @@ export async function HospitalLoginFunction( hospitalID ){
     }
 }
 
-export async function getHospitalID(){
+export async function GetHospitalID(){
     return currentHospitalID;  
 }
 
@@ -72,8 +55,7 @@ export async function GetHospitalDetailsFunction( hospitalID ){
         HospitalContract.address
     );
     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    let result = null;
-    result = await hospitalContract.methods.GetHospital(currentHospitalID).call({
+    const result = await hospitalContract.methods.GetHospital(currentHospitalID).call({
         from: accounts[0]
     }); 
 
@@ -89,8 +71,6 @@ export async function AddNewRecipient( firstName, lastName, residentialAddress, 
         HospitalContract.abi,
         HospitalContract.address
     );
-
-    console.log("Contract Address: ",HospitalContract.address)
 
     console.log("GETTER: ",
         typeof firstName,
@@ -133,5 +113,47 @@ export async function AddNewRecipient( firstName, lastName, residentialAddress, 
     }
 }   
 
+export async function GetRecipientCount(){
+    let result = null;
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
+    const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    const hospitalContract = new web3.eth.Contract(
+        HospitalContract.abi,
+        HospitalContract.address
+    );
+    try{
+        result = await hospitalContract.methods.GetRecipientList().call({
+            from: accounts[0]
+        });
+
+        if(result){
+            console.log("Successful call to GetRecipientList");
+            return result
+        }
+        else{
+            console.log("Error in calling GetRecipientList");
+        }
+    }catch (error){
+        console.log("Error: ",error);
+    }
+        
+}
+
+
+export async function GetRecipientDetails( recipientID ){
+    try{
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+        hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
+
+        const recipientDetails = await hospitalContract.methods.GetRecipient(recipientID).call({
+            from: accounts[0]
+        });
+
+        return recipientDetails;
+    }catch(error){
+        console.log("Error: ", error);
+    }
+}
 
