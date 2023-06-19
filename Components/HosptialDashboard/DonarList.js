@@ -82,7 +82,7 @@ const DonorList = ({donorlist}) =>{
               <td>{item.donorContact}</td>
               <td>{item.donorEmail}</td>
               <td>
-                <button id = "action">Find Match</button>
+                <button id = "action">More Info</button>
               </td>
             </tr>
           ))}
