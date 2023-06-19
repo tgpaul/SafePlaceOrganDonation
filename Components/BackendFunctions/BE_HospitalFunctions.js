@@ -55,7 +55,7 @@ export async function GetHospitalDetailsFunction( hospitalID ){
         HospitalContract.address
     );
     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    const result = await hospitalContract.methods.GetHospital(currentHospitalID).call({
+    const result = await hospitalContract.methods.GetHospital(localStorage.getItem("HospitalID")).call({
         from: accounts[0]
     }); 
 
