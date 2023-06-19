@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { AddNewRecipient } from '../BackendFunctions/BE_HospitalFunctions';
 
 const RecipientList = ({recipientlist}) => {
+  const [mainRecipientList, setReciepeintList] = useState([
+    {
+      recipientID: 1,
+      recipientName: "John Doe",
+      recipientOrganNeeded: "Heart",
+      recipientBloodGroup: "AB+",
+      recipientContact: "123-456-7890",
+      recipientResAddress: "john.doe@example.com"
+    },
+    // Add more objects as needed
+  ]);
   const [showPopup, setShowPopup] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

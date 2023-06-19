@@ -101,7 +101,7 @@ function HospitalDashboard(){
   //   donorRecipientID
   // }
 
-  const recipientList = [
+  const recipientListMock = [
     {
       recipientID: 1,
       recipientName: "John Doe",
@@ -141,8 +141,8 @@ function HospitalDashboard(){
   useEffect(() => {
     switch (page) {
       case "RecipientList":
-        setComponent([<RecipientList recipientlist={recipientList} />]);
-        console.log("reslist:" , recipientList )
+        setComponent([<RecipientList recipientlist={recipientListMock} />]);
+        console.log("reslist:" , recipientListMock )
         break;
       case "DonorList":
         setComponent([<DonorList donorlist={donorList} />]);
@@ -151,12 +151,12 @@ function HospitalDashboard(){
         setComponent([<MatchingHistory data={MatchingList} />]);
         break;
       default:
-        setComponent([<RecipientList recipientlist={recipientList} />]);
+        setComponent([<RecipientList recipientlist={recipientListMock} />]);
         break;
     }
   }, [page]);
 
-  const [component, setComponent] = useState(<RecipientList recipientlist={recipientList}/>);
+  const [component, setComponent] = useState(<RecipientList recipientlist={recipientListMock}/>);
 
 
   return (
