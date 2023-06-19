@@ -235,9 +235,9 @@
 			"name": "GetDonorCount",
 			"outputs": [
 				{
-					"internalType": "uint256",
+					"internalType": "uint256[]",
 					"name": "",
-					"type": "uint256"
+					"type": "uint256[]"
 				}
 			],
 			"stateMutability": "view",
@@ -401,5 +401,5 @@
 			"type": "function"
 		}
 	],
-    "address": "0xC3cfcF4308b634bF84bB22242F209444B1075dbA"
+    "address": "0x661cD350DA8942F65cD3E102Fa9be7689b2f09DE"
   }

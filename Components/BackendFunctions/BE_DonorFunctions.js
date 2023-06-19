@@ -133,7 +133,6 @@ export async function GetDonorFunction( ID ){
         donorContract = new web3.eth.Contract(DonorContract.abi, DonorContract.address);
         
         const donorDetails = await donorContract.methods.donors(ID).call();     
-        console.log("ID",ID,"GETTER: ",donorDetails);
         return donorDetails;
     }catch (error) {
         console.log('Error: ', error);

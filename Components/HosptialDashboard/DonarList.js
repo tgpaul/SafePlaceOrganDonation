@@ -8,20 +8,21 @@ const DonorList = ({donorlist}) =>{
   useEffect(() => {
     const fetchDonorDetails = async () => {
       let count = await GetDonorCount()
+      console.log("Count",count);
 
       const donorDetails = [];
 
-      for ( let i=0 ; i<count ; i++ ){
-        console.log("donor structure", await GetDonorFunction(i) )
-        let data = await GetDonorFunction(i);
+      for ( let i=0 ; i<count.length ; i++ ){
+        let data = await GetDonorFunction(Number(count[i]));
+        console.log("Data",data);
         try {
           let donorFormat = {
             donorId: Number(data[0]),
             donorWallet: data[1],
             donorName: data[2] + " " + data[3],
             donorContact: data[4],
-            donorEmail:data[5],
-            donorResAddrs:data[6],
+            donorEmail: data[5],
+            donorResAddrs: data[6],
             donorBloodGroup: data[7],
             donorOrganToDonate: data[8],
             donorHospitalID : data[9],
