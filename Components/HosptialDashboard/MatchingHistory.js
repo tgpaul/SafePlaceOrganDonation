@@ -1,4 +1,41 @@
+import React, { useState, useEffect } from 'react';
+import { GetMatchDetails, GetMatchIDs } from '../BackendFunctions/BE_HospitalFunctions';
+
 const MatchingHistory = ({data}) =>  {
+  const [mainMatchingList, setMatchingList] = useState([]);
+
+useEffect(()=>{
+  const fetchMatchingDetails = async () => {
+    let count = await GetMatchIDs();
+    console.log("Matching count",count);
+
+    const matchingDetails = [];
+
+    for( let i=0 ; i<count.length ; i++){
+      let data = await GetMatchDetails(Number(count[i]));
+      console.log("DATA",data);
+      try{
+        let matchingFormat = {
+          organType: data[6],
+          donorName: data[2],
+          recipientName: data[4],
+          approvalTime: data[8],
+          matchingStatus: data[7]
+        }
+
+        matchingDetails.push(matchingFormat);
+      }catch(error){
+        console.log("Error:",error);
+      }
+    }
+
+    setMatchingList(matchingDetails);
+
+  };
+  fetchMatchingDetails();
+},[]);
+
+
     return (
       <div className="Table-container">
         <div className="search-container">
@@ -18,13 +55,13 @@ const MatchingHistory = ({data}) =>  {
             </tr>
           </thead>
           <tbody>
-          {data.map((item, index) => (
+          {mainMatchingList.map((item, index) => (
             <tr key={index}>
               <td>{item.organType}</td>
               <td>{item.donorName}</td>
               <td>{item.recipientName}</td>
               <td>{item.approvalTime}</td>
-              <td>{item.status}</td>
+              <td>{item.matchingStatus}</td>
               <td>
                 <button id = "action">Action</button>
               </td>
