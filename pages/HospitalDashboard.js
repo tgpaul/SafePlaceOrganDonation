@@ -110,6 +110,14 @@ function HospitalDashboard(){
       recipientContact: "123-456-7890",
       recipientResAddress: "john.doe@example.com"
     },
+    {
+      recipientID: 2,
+      recipientName: "Johsasdasdn Doe",
+      recipientOrganNeeded: "Heart",
+      recipientBloodGroup: "AB+",
+      recipientContact: "123-456-7890",
+      recipientResAddress: "john.doe@example.com"
+    },
     // Add more objects as needed
   ];
 
