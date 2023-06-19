@@ -1,4 +1,57 @@
+import React, { useState, useEffect } from 'react';
+import { GetDonorCount, GetDonorFunction } from '../BackendFunctions/BE_DonorFunctions';
+
+
 const DonorList = ({donorlist}) =>{
+  const [mainDonorList, setDonorList] = useState([]);
+
+  useEffect(() => {
+    const fetchDonorDetails = async () => {
+      let count = await GetDonorCount()
+
+      const donorDetails = [];
+
+      for ( let i=0 ; i<count ; i++ ){
+        console.log("donor structure", await GetDonorFunction(i) )
+        let data = await GetDonorFunction(i);
+        try {
+          let donorFormat = {
+            donorId: Number(data[0]),
+            donorWallet: data[1],
+            donorName: data[2] + " " + data[3],
+            donorContact: data[4],
+            donorEmail:data[5],
+            donorResAddrs:data[6],
+            donorBloodGroup: data[7],
+            donorOrganToDonate: data[8],
+            donorHospitalID : data[9],
+            donorRecipientID :data[10],
+          }
+
+          // setReciepeintList([...mainRecipientList, recipientFormat])
+          donorDetails.push(donorFormat);
+          // console.log("list", recipientFormat);
+        } catch (error) {
+          console.log("error fecting recipent");
+        }
+      }
+      setDonorList(donorDetails)
+      console.log("dononr details", donorDetails)
+    };
+
+    fetchDonorDetails();
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
     return (
       <div className="Table-container">
         <div className="search-container">
@@ -19,7 +72,7 @@ const DonorList = ({donorlist}) =>{
             </tr>
           </thead>
           <tbody>
-          {donorlist.map((item, index) => (
+          {mainDonorList.map((item, index) => (
             <tr key={index}>
               <td>{item.donorId}</td>
               <td>{item.donorName}</td>

@@ -41,33 +41,33 @@ function HospitalDashboard(){
   ];
 
 
-  // const donorList = [
-  //   {
-  //     donorId: 1,
-  //     donorName: "John Doe",
-  //     organ: "Heart",
-  //     bloodGroup: "AB+",
-  //     phoneNumber: "123-456-7890",
-  //     email: "john.doe@example.com"
-  //   },
-  //   {
-  //     donorId: 2,
-  //     donorName: "Jane Smith",
-  //     organ: "Kidney",
-  //     bloodGroup: "O-",
-  //     phoneNumber: "987-654-3210",
-  //     email: "john.doe@example.com"
-  //   },
-  //   {
-  //     donorId: 3,
-  //     donorName: "Alice Johnson",
-  //     organ: "Liver",
-  //     bloodGroup: "A+",
-  //     phoneNumber: "456-789-0123",
-  //     email: "john.doe@example.com"
-  //   },
-  //   // Add more objects as needed
-  // ];
+  const donorList = [
+    {
+      donorId: 1,
+      donorName: "John Doe",
+      organ: "Heart",
+      bloodGroup: "AB+",
+      phoneNumber: "123-456-7890",
+      email: "john.doe@example.com"
+    },
+    {
+      donorId: 2,
+      donorName: "Jane Smith",
+      organ: "Kidney",
+      bloodGroup: "O-",
+      phoneNumber: "987-654-3210",
+      email: "john.doe@example.com"
+    },
+    {
+      donorId: 3,
+      donorName: "Alice Johnson",
+      organ: "Liver",
+      bloodGroup: "A+",
+      phoneNumber: "456-789-0123",
+      email: "john.doe@example.com"
+    },
+    // Add more objects as needed
+  ];
   // let recipientID, recipientFirstName, recipientLastName, recipientResAddress, recipientContact, recipientBloodGroup, recipientOrganNeeded, recipientDonorID, recipientHospitalID;
   // let recipientFormat;
   // // let recipientList = [];
