@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import { RegisterDonorFunction } from '../BackendFunctions/BE_DonorFunctions';
 
 const DonorInfoForm = (donorData) => {
+  const [isDisabled, setDisabled] = useState(false);
+
   const [donor, setDonor] = useState({
     bloodType: donorData.data[7],
     organType: donorData.data[8],
@@ -23,6 +25,9 @@ const DonorInfoForm = (donorData) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const test = await RegisterDonorFunction(donor.bloodType, donor.organType);
+    if(donor.bloodType !== '' && donor.organType !== ''){
+      setDisabled(true)
+    }
     // saveDonorDetails(donor);
   };
 
@@ -30,7 +35,12 @@ const DonorInfoForm = (donorData) => {
   //   console.log('Saving donor details:', donorData);
   // };
 
-  const isDisabled = donor.bloodType !== '' && donor.organType !== '';
+  useEffect(() => {
+    if(donor.bloodType !== '' && donor.organType !== ''){
+      setDisabled(true)
+    }
+    console.log("idis", isDisabled)
+  }, []);
 
   return (
     <form id="form1" onSubmit={handleSubmit}>
