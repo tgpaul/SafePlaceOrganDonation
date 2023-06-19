@@ -186,7 +186,7 @@ export async function CreateMatch(
             year: 'numeric',
         };
         const _matchTime = now.toLocaleString('en-US', options).replace(',', '');
-        
+
         const _status = "Pending";
         accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
@@ -225,7 +225,52 @@ export async function CreateMatch(
 }
 
 // Function to get list of matchIDs of current hospital
+export async function GetMatchIDs(){
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
+
+    const matchList = await hospitalContract.methods.GetMatchList().call({
+        from: accounts[0]
+    });
+
+    return matchList;
+}
 
 // Function to return match details of a given matchID
+export async function GetMatchDetails( _matchID ){
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
+
+    const matchDetails = await hospitalContract.methods.GetMatchDetails(_matchID).call({
+        from: accounts[0]
+    });
+
+    return matchDetails
+}
 
 // Function that takes the donorID and return corresponding matchID, return 0 if no match present
+export async function CheckIfDonorMatched ( _donorID ){
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
+
+    const check = await hospitalContract.methods.CheckIfDonorMatched( _donorID ).call({
+        from: accounts[0]
+    });
+
+    return check;
+}
+// Function that takes the donorID and return corresponding matchID, return 0 if no match present
+export async function CheckIfRecipientMatched ( _recipientID ){
+    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
+    hospitalContract = new web3.eth.Contract(HospitalContract.abi,HospitalContract.address);
+
+    const check = await hospitalContract.methods.CheckIfRecipientMatched( _recipientID ).call({
+        from: accounts[0]
+    });
+
+    return check;
+}
