@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GetDonorCount, GetDonorFunction } from '../../BackendFunctions/BE_DonorFunctions';
+import { CreateMatch } from '../../BackendFunctions/BE_HospitalFunctions';
 
 const MatchPopupTable = (props) => {
 
@@ -46,6 +47,8 @@ const MatchPopupTable = (props) => {
 
     const handleApproveClick = async(donorID, donorName) => {
         console.log(donorID,donorName,props.recipientDetails[0])
+        await CreateMatch(donorID,donorName,props.recipientDetails[0],props.recipientDetails[1],props.recipientDetails[3]);
+
     }
 
 

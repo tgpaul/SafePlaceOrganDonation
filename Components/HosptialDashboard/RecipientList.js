@@ -7,7 +7,7 @@ const RecipientList = ({recipientlist}) => {
   const [mainRecipientList, setReciepeintList] = useState([]);
   const [recipientCount, setRecipientCount] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
-  const [showMatchPopup, setShowMatchPopup] = useState(true);
+  const [showMatchPopup, setShowMatchPopup] = useState(false);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
