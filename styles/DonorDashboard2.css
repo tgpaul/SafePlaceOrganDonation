@@ -118,6 +118,12 @@
     box-shadow: 0px 5px white;
 }
 
+.form-control input,
+.form-control select[disabled] {
+    background-color: white;
+    color: black;
+  }
+
 .save-button{
  background-color: #247DFF;
   border:#247DFF;
@@ -129,6 +135,12 @@
   font-size: 14px;
   border-radius: 6px;
 }
+
+.save-button[disabled]{
+ background-color: #0a3b85;
+ cursor: default;
+}
+
 
 /* Styling form-control Class */
 .form-control {
