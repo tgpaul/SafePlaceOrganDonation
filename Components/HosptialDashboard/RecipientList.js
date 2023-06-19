@@ -15,7 +15,7 @@ const RecipientList = ({recipientlist}) => {
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
-    console.log("List ",recipientlist);
+    // console.log("List ",recipientlist);
   };
 
   async function fetchRecipientCount() {
@@ -25,11 +25,11 @@ const RecipientList = ({recipientlist}) => {
 
   useEffect(() => {
     const fetchRecipientDetails = async () => {
-      console.log("count ", recipientCount.length);
+      // console.log("count ", recipientCount.length);
       const recipientDetails = [];
 
-      for( let i = 1;i<5; i++){
-        let data = await GetRecipientDetails(i);
+      for( let i = 0;i<recipientCount.length; i++){
+        let data = await GetRecipientDetails(Number(recipientCount[i]));
         if(data){
           try {
             let recipientFormat = {
@@ -45,14 +45,14 @@ const RecipientList = ({recipientlist}) => {
 
             // setReciepeintList([...mainRecipientList, recipientFormat])
             recipientDetails.push(recipientFormat);
-            console.log("list", recipientFormat);
+            // console.log("list", recipientFormat);
           } catch (error) {
-            console.log("error fecting recipent");
+            // console.log("error fecting recipent");
           }
         }
       }
       setReciepeintList(recipientDetails);
-      console.log("mainlist", mainRecipientList);
+      // console.log("mainlist", mainRecipientList);
       // console.log("temp list " , recipientlist)
     };
 
