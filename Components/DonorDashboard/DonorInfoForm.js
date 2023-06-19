@@ -77,14 +77,14 @@ const DonorInfoForm = (donorData) => {
           disabled={isDisabled}
         >
           <option value="">Select</option>
-          <option value="a+">A+</option>
-          <option value="b+">B+</option>
-          <option value="ab+">AB+</option>
-          <option value="o+">O+</option>
-          <option value="a-">A-</option>
-          <option value="b-">B-</option>
-          <option value="ab-">AB-</option>
-          <option value="-">O-</option>
+          <option value="A+">A+</option>
+          <option value="B+">B+</option>
+          <option value="AB+">AB+</option>
+          <option value="O+">O+</option>
+          <option value="A-">A-</option>
+          <option value="B-">B-</option>
+          <option value="AB-">AB-</option>
+          <option value="O-">O-</option>
         </select>
       </div>
 
@@ -100,10 +100,10 @@ const DonorInfoForm = (donorData) => {
           disabled={isDisabled}
         >
           <option value="">Select</option>
-          <option value="kidney">Kidney</option>
-          <option value="liver">Liver</option>
-          <option value="heart">Heart</option>
-          <option value="tissue">Tissue</option>
+          <option value="Kidney">Kidney</option>
+          <option value="Liver">Liver</option>
+          <option value="Heart">Heart</option>
+          <option value="Tissue">Tissue</option>
         </select>
       </div>
 
