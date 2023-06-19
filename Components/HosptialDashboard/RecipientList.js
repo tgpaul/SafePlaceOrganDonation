@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AddNewRecipient } from '../BackendFunctions/BE_HospitalFunctions';
 
-const RecipientList = ({ recipientlist }) => {
+const RecipientList = ({recipientlist}) => {
   const [showPopup, setShowPopup] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -12,19 +12,18 @@ const RecipientList = ({ recipientlist }) => {
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+    console.log("List ",recipientlist);
   };
 
   const handleAddRecipient = () => {
-    // Here you can perform any necessary actions with the entered recipient details
-    // For simplicity, let's just log the details for now
-    console.log("CALLER: ",{
-      firstName,
-      lastName,
-      bloodGroup,
-      organNeeded,
-      phoneNumber,
-      residentialAddress,
-    });
+    // console.log("CALLER: ",{
+    //   firstName,
+    //   lastName,
+    //   bloodGroup,
+    //   organNeeded,
+    //   phoneNumber,
+    //   residentialAddress,
+    // });
 
     AddNewRecipient(
       firstName,
@@ -116,19 +115,19 @@ const RecipientList = ({ recipientlist }) => {
               <th>Organ</th>
               <th>Blood group</th>
               <th>Phone</th>
-              <th>Email</th>
+              <th>Residential Address</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {recipientlist.map((item, index) => (
               <tr key={index}>
-                <td>{item.patientId}</td>
-                <td>{item.patientName}</td>
-                <td>{item.organ}</td>
-                <td>{item.bloodGroup}</td>
-                <td>{item.phoneNumber}</td>
-                <td>{item.email}</td>
+                <td>{item.recipientID}</td>
+                <td>{item.recipientName}</td>
+                <td>{item.recipientOrganNeeded}</td>
+                <td>{item.recipientBloodGroup}</td>
+                <td>{item.recipientContact}</td>
+                <td>{item.recipientResAddress}</td>
                 <td>
                   <button id="action">Find Match</button>
                 </td>
