@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { AddNewRecipient, GetRecipientCount, GetRecipientDetails } from '../BackendFunctions/BE_HospitalFunctions';
+import MatchPopupTable from './MatchPopup/MatchPopupTable';
 
 const RecipientList = ({recipientlist}) => {
   // let mainRecipientList = [];
   const [mainRecipientList, setReciepeintList] = useState([]);
   const [recipientCount, setRecipientCount] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
+  const [showMatchPopup, setShowMatchPopup] = useState(false);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
@@ -13,8 +16,14 @@ const RecipientList = ({recipientlist}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [residentialAddress, setResidentialAddress] = useState('');
 
+  const [matchRecipientDetails, setMatchRecipientDetails] = useState([]);
+
   const togglePopup = () => {
     setShowPopup(!showPopup);
+    // console.log("List ",recipientlist);
+  };
+  const toggleMatchPopup = () => {
+    setShowMatchPopup(!showMatchPopup);
     // console.log("List ",recipientlist);
   };
 
@@ -99,6 +108,19 @@ const RecipientList = ({recipientlist}) => {
     // Close the popup
     togglePopup();
   };
+  const plist = [];
+  const handleFindMatch = async(ID,name,bloodGroup,organ) => {
+    
+    const newRecipientDetails = [ID, name, bloodGroup, organ];
+    setMatchRecipientDetails(newRecipientDetails)
+    console.log("match details = ",matchRecipientDetails[1])
+    toggleMatchPopup();
+  };
+
+
+
+
+
 
   return (
     <div className="Table-container">
@@ -152,6 +174,20 @@ const RecipientList = ({recipientlist}) => {
           </div>
         </div>
       )}
+      {showMatchPopup && (
+        <div className="popup">
+          <div className="popup-match-content">
+            <h1>Find Match</h1>
+            <>
+            <MatchPopupTable recipientDetails = {matchRecipientDetails}/>
+            </>
+            <div className='match-popup-button-container'>
+                <button className='popup-button' onClick={toggleMatchPopup}>Close</button>
+            </div>
+            
+          </div>
+        </div>
+      )}
       <div className="search-container">
         <input className="search-bar" type="text" placeholder="Search" />
         <button className="add" onClick={togglePopup}>
@@ -181,7 +217,7 @@ const RecipientList = ({recipientlist}) => {
                 <td>{item.recipientContact}</td>
                 <td>{item.recipientResAddress}</td>
                 <td>
-                  <button id="action">Find Match</button>
+                  <button id="action" onClick={() => handleFindMatch(item.recipientID,item.recipientName,item.recipientBloodGroup,item.recipientOrganNeeded)}>Find Match</button>
                 </td>
               </tr>
             ))}
