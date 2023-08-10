@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { GetDonorDetailsFunction } from '../Components/BackendFunctions/BE_DonorFunctions';
 import { GetRecipientDetails, GetHospitalDetailsFunction, CheckIfDonorMatched,GetMatchDetails } from '../Components/BackendFunctions/BE_HospitalFunctions';
 
-let MatchFound = 0;
 
 
 function DonorDashboardBody() {
@@ -23,10 +22,16 @@ function DonorDashboardBody() {
         setDonorData(donorData);
         console.log("DONOR",donorData);
   
-        const check = await CheckIfDonorMatched( donorData[0] );
+        let check = await CheckIfDonorMatched( donorData[0] );
+        // const check = 1;
+        console.log("Matchfound before",matchFound);
+
         console.log("CHECK",check);
 
-        if (check) {
+        if (check == 0) {
+          setMatchFound(false);
+        }else{
+          console.log("Matchfound 1",matchFound);
           const matchDetails = await GetMatchDetails(check);
           console.log("Match details",matchDetails);
 
@@ -38,9 +43,11 @@ function DonorDashboardBody() {
           setHospitalData(hospitalDetails);
           console.log("Hsopital Details : ",hospitalDetails);
 
-          
-
           setMatchFound(true);
+          console.log("Matchfound 2",matchFound);
+        }
+
+          
           // const recipientData = await GetRecipientDetails(donorData[10]);
           
           // console.log('RECIPIENT:', recipientData);
@@ -48,14 +55,14 @@ function DonorDashboardBody() {
           // const hospitalData = await GetHospitalDetailsFunction(donorData[9]);
           
           // console.log('HOSPITAL:', hospitalData);
-        }
+        
 
         setLoading(false);
       } catch (error) {
         console.log('Error:', error);
         setLoading(false);
       }
-    }
+    }   
 
     fetchData();
   }, []);
@@ -75,7 +82,7 @@ function DonorDashboardBody() {
           {matchFound ? (
             <DonorMatch_Found recipientData={recipientData} hospitalData={hospitalData} />
           ) : (
-            <DonorMatch_NotFound recipientData={recipientData} hospitalData={hospitalData} />
+            <DonorMatch_NotFound />
           )}
         </div>
       </div>

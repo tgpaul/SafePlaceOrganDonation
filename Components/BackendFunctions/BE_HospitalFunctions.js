@@ -9,7 +9,7 @@ import Intl from 'intl';
 const Web3 = require('web3');
 const HospitalContract = require('../../blockchain/build-info/HospitalRecipientContract.json');
 const RPC_URL = "HTTP://127.0.0.1:7545";
-//const RPC_URL = "https://rpc.sepolia.org";
+// const RPC_URL = "https://rpc.sepolia.org";
 
 let accounts, web3, hospitalContract;
 
